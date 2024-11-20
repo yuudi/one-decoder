@@ -1,0 +1,15 @@
+{
+  "name": "wasm_text_watermark",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "wasm_text_watermark_bg.wasm",
+    "wasm_text_watermark.js",
+    "wasm_text_watermark.d.ts"
+  ],
+  "main": "wasm_text_watermark.js",
+  "types": "wasm_text_watermark.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
