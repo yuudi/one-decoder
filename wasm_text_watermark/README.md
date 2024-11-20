@@ -1,8 +1,3 @@
-# hidden_watermark_web
-A Wasm-based wrapper for hidden_watermark
-
-
-
 
 ## to install packages from npm
 
@@ -13,10 +8,9 @@ npm install wasm_text_watermark
 ```
 
 
-## to build from Rust and Wasm
-
+## How to build from 
 ```shell
-cd wasm_text_watermark
+cd text_blind
 cargo clean
 wasm-pack build --target web
 ```
