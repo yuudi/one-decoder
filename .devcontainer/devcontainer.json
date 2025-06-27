@@ -1,0 +1,8 @@
+{
+  "name": "Node.js",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [4200],
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "npm ci"
+}

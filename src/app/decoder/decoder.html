@@ -1,0 +1,13 @@
+<form class="decoder-form">
+  <mat-form-field class="cipher-input">
+    <mat-label>密文</mat-label>
+    <textarea matInput [(ngModel)]="input" name="input"></textarea>
+  </mat-form-field>
+
+  <div class="decode-button-block">
+    <button class="decode-button" matButton="tonal" (click)="decode()">
+      解密
+    </button>
+  </div>
+  <span>{{ output }}</span>
+</form>

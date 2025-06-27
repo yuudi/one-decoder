@@ -1,0 +1,184 @@
+import { type DecoderPlugin } from '../decoder';
+import CryptoJS from 'crypto-js';
+
+export class BuddhaDecoder implements DecoderPlugin {
+  name = '佛曰';
+  description = 'takuron版与佛论禅';
+
+  private static defaultPasswords = ['TakuronDotTop', 'hahaka.com'];
+
+  checkString(input: string): number {
+    if (input.startsWith('佛曰：')) {
+      return 100;
+    }
+    if (input.startsWith('熊曰：')) {
+      return 100;
+    }
+
+    return 0;
+  }
+
+  decode(input: string, data: { key?: string }): string {
+    const { key } = data;
+    const charset = input.startsWith('佛曰：')
+      ? BuddhaDecoder.buddhaCharset
+      : input.startsWith('熊曰：')
+        ? BuddhaDecoder.bearCharset
+        : null;
+    if (!charset) throw Error('unknown charset');
+    const base64 = input.slice(3).replace(/./, (v) => charset[v]);
+    if (key) {
+      return CryptoJS.AES.decrypt('U2FsdGVkX1' + base64, key).toString(
+        CryptoJS.enc.Utf8,
+      );
+    } else {
+      return this.tryDecrypt('U2FsdGVkX1' + base64);
+    }
+  }
+
+  private tryDecrypt(cipher: string): string {
+    for (const key of BuddhaDecoder.defaultPasswords) {
+      try {
+        return CryptoJS.AES.decrypt(cipher, key).toString(CryptoJS.enc.Utf8);
+      } catch {
+        continue;
+      }
+    }
+    throw Error('need password');
+  }
+
+  private static bearCharset: Record<string, string> = {
+    蛇: 'e',
+    獾: 'E',
+    豹: 't',
+    鱼: 'T',
+    鹌: 'a',
+    牛: 'A',
+    羊: 'o',
+    雁: 'O',
+    鹑: 'i',
+    鸠: 'I',
+    鹞: 'n',
+    熊: 'N',
+    鸮: 's',
+    狸: 'S',
+    鸡: 'h',
+    鹎: 'H',
+    貔: 'r',
+    鸽: 'R',
+    豚: 'd',
+    狐: 'D',
+    鸟: 'l',
+    鹤: 'L',
+    兔: 'c',
+    狮: 'C',
+    龟: 'u',
+    鳐: 'U',
+    鼠: 'm',
+    虎: 'M',
+    龙: 'w',
+    鲲: 'W',
+    鹿: 'f',
+    鸰: 'F',
+    雀: 'g',
+    鲑: 'G',
+    鸵: 'y',
+    鲨: 'Y',
+    豺: 'p',
+    驴: 'P',
+    鹰: 'b',
+    鳗: 'B',
+    狒: 'v',
+    狗: 'V',
+    蜂: 'k',
+    猪: 'K',
+    鲆: 'j',
+    狼: 'J',
+    鸭: 'x',
+    貂: 'X',
+    貅: 'q',
+    蜜: 'Q',
+    鹂: 'z',
+    马: 'Z',
+    鼬: '0',
+    猴: '1',
+    鸬: '2',
+    鹅: '3',
+    象: '4',
+    鳅: '5',
+    猫: '6',
+    鹄: '7',
+    鸢: '8',
+    鲸: '9',
+    鳄: '+',
+    鳖: '/',
+    猩: '=',
+  };
+  private static buddhaCharset: Record<string, string> = {
+    啰: 'e',
+    羯: 'E',
+    婆: 't',
+    提: 'T',
+    摩: 'a',
+    埵: 'A',
+    诃: 'o',
+    迦: 'O',
+    耶: 'i',
+    吉: 'I',
+    娑: 'n',
+    佛: 'N',
+    夜: 's',
+    驮: 'S',
+    那: 'h',
+    谨: 'H',
+    悉: 'r',
+    墀: 'R',
+    阿: 'd',
+    呼: 'D',
+    萨: 'l',
+    尼: 'L',
+    陀: 'c',
+    唵: 'C',
+    唎: 'u',
+    伊: 'U',
+    卢: 'm',
+    喝: 'M',
+    帝: 'w',
+    烁: 'W',
+    醯: 'f',
+    蒙: 'F',
+    罚: 'g',
+    沙: 'G',
+    嚧: 'y',
+    他: 'Y',
+    南: 'p',
+    豆: 'P',
+    无: 'b',
+    孕: 'B',
+    菩: 'v',
+    伽: 'V',
+    怛: 'k',
+    俱: 'K',
+    哆: 'j',
+    度: 'J',
+    皤: 'x',
+    阇: 'X',
+    室: 'q',
+    地: 'Q',
+    利: 'z',
+    遮: 'Z',
+    穆: '0',
+    参: '1',
+    舍: '2',
+    苏: '3',
+    钵: '4',
+    曳: '5',
+    数: '6',
+    写: '7',
+    栗: '8',
+    楞: '9',
+    咩: '+',
+    输: '/',
+    漫: '=',
+  };
+}
