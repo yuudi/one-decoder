@@ -1,12 +1,19 @@
 <mat-toolbar>
-  <button mat-icon-button>
-    <mat-icon fontIcon="menu" />
-  </button>
+  <button mat-button routerLink="/decoder">解码</button>
+  <button mat-button routerLink="/about">关于</button>
   <span class="spacer"></span>
   <span>统一解码</span>
   <span class="spacer"></span>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="share()">
     <mat-icon fontIcon="share" />
   </button>
+  <a
+    mat-icon-button
+    href="https://github.com/yuudi/easy-exchange-rate"
+    target="_blank"
+  >
+    <mat-icon svgIcon="github" />
+  </a>
 </mat-toolbar>
+
 <router-outlet></router-outlet>

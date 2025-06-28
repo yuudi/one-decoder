@@ -22,10 +22,9 @@ import { DecodeResult } from '../../decoders/decoder';
 export class Decoder {
   input = '';
   output: DecodeResult[] | null = null;
-  decoding = inject(Decoding);
+  private decoding = inject(Decoding);
 
   async decode() {
-    // Placeholder for decode logic
     this.output = await this.decoding.decode(this.input);
   }
 }

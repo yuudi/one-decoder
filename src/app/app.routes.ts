@@ -6,4 +6,8 @@ export const routes: Routes = [
     path: 'decoder',
     loadComponent: () => import('./decoder/decoder').then((m) => m.Decoder),
   },
+  {
+    path: 'about',
+    loadComponent: () => import('./about/about').then((m) => m.About),
+  },
 ];
