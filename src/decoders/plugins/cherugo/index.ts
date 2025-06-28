@@ -3,7 +3,7 @@ import type Encoder from './lib/gbk';
 
 export class CherugoDecoder implements DecoderPlugin {
   name = '切噜语';
-  description = '作者：github.com/Ice9Coffee；移植：github.com/yuudi';
+  description = 'https://pcrbot.github.io/cherugo.js/';
   private encoder: Encoder | undefined;
   private async getEncoder() {
     if (!this.encoder) {
@@ -14,10 +14,7 @@ export class CherugoDecoder implements DecoderPlugin {
   }
 
   checkString(input: string): number {
-    if (
-      input.startsWith('切噜～♪') &&
-      /^[切卟叮咧哔唎啪啰啵嘭噜噼巴拉蹦铃]+$/.test(input.slice(4))
-    ) {
+    if (input.startsWith('切噜～♪')) {
       return 100;
     }
 

@@ -16,7 +16,7 @@ export interface DecoderPlugin {
     data: Readonly<{ key?: string }>,
   ): ValueOrPromise<string>;
 
-  encode?(input: string): ValueOrPromise<string>;
+  encode?(input: string, key?: string): ValueOrPromise<string>;
 }
 
 export interface DecodeResult {
@@ -80,5 +80,37 @@ export class Decoder {
       freq[char] = (freq[char] || 0) + 1;
     }
     return freq;
+  }
+
+  getPluginsList() {
+    return this.getPlugins().map((plugin, index) => ({
+      id: index,
+      name: plugin.name,
+      description: plugin.description,
+      encoderAvailable: !!plugin.encode,
+    }));
+  }
+
+  private getPluginById(id: number): DecoderPlugin | undefined {
+    const plugins = this.getPlugins();
+    return plugins[id] || undefined;
+  }
+
+  async encode(
+    id: number,
+    input: string,
+    key?: string,
+  ): Promise<string | undefined> {
+    const plugin = this.getPluginById(id);
+    if (!plugin || !plugin.encode) {
+      console.error(`Encoder not available for plugin ID ${id}`);
+      return undefined;
+    }
+    try {
+      return await plugin.encode(input, key);
+    } catch (error) {
+      console.error(`Error encoding with plugin ${plugin.name}:`, error);
+      return undefined;
+    }
   }
 }

@@ -1,0 +1,32 @@
+@if (result(); as result) {
+  <mat-card>
+    <mat-card-header class="result-header">
+      <mat-card-title class="result-name">{{ result.name }}</mat-card-title>
+      @if (result.description; as description) {
+        <mat-card-subtitle class="result-description">{{
+          description
+        }}</mat-card-subtitle>
+      }
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>
+        {{ result.decoded }}
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button
+        matButton="tonal"
+        [cdkCopyToClipboard]="result.decoded"
+        (click)="showCopied()"
+      >
+        @if (copied()) {
+          <span>已复制</span>
+        } @else {
+          <span>复制</span>
+        }
+      </button>
+    </mat-card-actions>
+  </mat-card>
+}

@@ -1,7 +1,13 @@
 <form class="decoder-form">
   <mat-form-field class="cipher-input">
     <mat-label>密文</mat-label>
-    <textarea matInput [(ngModel)]="input" name="input"></textarea>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="5"
+      [(ngModel)]="input"
+      name="input"
+    ></textarea>
   </mat-form-field>
 
   <div class="decode-button-block">
@@ -9,5 +15,8 @@
       解密
     </button>
   </div>
-  <span>{{ output }}</span>
 </form>
+
+<div class="decoder-results">
+  <app-results [results]="output"></app-results>
+</div>

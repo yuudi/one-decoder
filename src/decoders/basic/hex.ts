@@ -12,10 +12,19 @@ export class HexDecoder implements DecoderPlugin {
   }
 
   decode(input: string): string {
-    return decodeURIComponent('%' + input.match(/../g)?.join('%'));
+    const bytes = [];
+    for (let i = 0; i < input.length; i += 2) {
+      bytes.push(parseInt(input.slice(i, i + 2), 16));
+    }
+    const uint8Array = new Uint8Array(bytes);
+    return new TextDecoder('utf-8').decode(uint8Array);
   }
 
   encode(input: string): string {
-    return encodeURIComponent(input).replace(/%/g, '').toLowerCase();
+    const encoder = new TextEncoder();
+    const uint8Array = encoder.encode(input);
+    return Array.from(uint8Array)
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
   }
 }
