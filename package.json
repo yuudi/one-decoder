@@ -1,0 +1,17 @@
+{
+  "name": "whisperer-wasm",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "pkg/whisperer_wasm_bg.wasm",
+    "pkg/whisperer_wasm.js",
+    "pkg/whisperer_wasm_bg.js",
+    "pkg/whisperer_wasm.d.ts"
+  ],
+  "main": "pkg/whisperer_wasm.js",
+  "types": "pkg/whisperer_wasm.d.ts",
+  "sideEffects": [
+    "./pkg/whisperer_wasm.js",
+    "./pkg/snippets/*"
+  ]
+}
