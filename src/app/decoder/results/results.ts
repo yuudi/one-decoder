@@ -1,12 +1,12 @@
-import { Component, input, signal, effect } from '@angular/core';
-import { DecodeResult } from '../../../decoders/decoder';
-import { ResultCard } from './result-card/result-card';
+import { Component, effect, input, signal } from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   FilterFulfilledPromisePipe,
   FilterSuccessDecodeResultPipe,
   SortByKeyPipe,
 } from '../../../common/utils-pipe';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DecodeResult } from '../../../decoders/decoder';
+import { ResultCard } from './result-card/result-card';
 
 @Component({
   selector: 'app-results',

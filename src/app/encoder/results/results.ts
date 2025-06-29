@@ -1,7 +1,7 @@
 import { Component, effect, input, signal } from '@angular/core';
-import { EncodeResult } from '../../../decoders/decoder';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FilterFulfilledPromisePipe } from '../../../common/utils-pipe';
+import { EncodeResult } from '../../../decoders/decoder';
 import { ResultCard } from './result-card/result-card';
 
 @Component({

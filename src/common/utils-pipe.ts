@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, signal, Signal } from '@angular/core';
+import { Pipe, PipeTransform, Signal, signal } from '@angular/core';
 import { DecodeResult, isDecodeSuccessResult } from '../decoders/decoder';
 
 @Pipe({

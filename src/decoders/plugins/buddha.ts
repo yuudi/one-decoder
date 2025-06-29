@@ -1,5 +1,4 @@
 import { type DecoderPlugin } from '../decoder';
-import CryptoJS from 'crypto-js';
 
 export class BuddhaDecoder implements DecoderPlugin {
   id = 'buddha';
@@ -31,6 +30,7 @@ export class BuddhaDecoder implements DecoderPlugin {
   }
 
   async decode(input: string, data: { key?: string }): Promise<string> {
+    const { default: CryptoJS } = await import('crypto-js');
     const { key } = data;
     const charset =
       input.startsWith('佛曰：') || input.startsWith('佛又曰：')
@@ -50,7 +50,7 @@ export class BuddhaDecoder implements DecoderPlugin {
     } else {
       for (const possibleKey of BuddhaDecoder.defaultPasswords) {
         try {
-          console.debug('佛曰：try password: ' + possibleKey);
+          console.debug('try password: ' + possibleKey);
           const result = CryptoJS.AES.decrypt(
             'U2FsdGVkX1' + base64,
             possibleKey,
@@ -66,6 +66,7 @@ export class BuddhaDecoder implements DecoderPlugin {
   }
 
   async encode(input: string, key?: string): Promise<string> {
+    const { default: CryptoJS } = await import('crypto-js');
     const encrypted = CryptoJS.AES.encrypt(
       input,
       key || BuddhaDecoder.defaultPasswords[0],

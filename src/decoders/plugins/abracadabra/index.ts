@@ -1,4 +1,3 @@
-import { Abracadabra } from 'abracadabra-cn';
 import { type DecoderPlugin } from '../../decoder';
 
 export class AbracadabraDecoder implements DecoderPlugin {
@@ -20,14 +19,16 @@ export class AbracadabraDecoder implements DecoderPlugin {
     return 0;
   }
 
-  decode(input: string, data: { key?: string }): string {
+  async decode(input: string, data: { key?: string }): Promise<string> {
+    const { Abracadabra } = await import('abracadabra-cn'); // lazy-load library
     const { key } = data;
     const abra = new Abracadabra();
     abra.Input_Next(input, 'DECRYPT', key || AbracadabraDecoder.defaultKey);
     return abra.Output() as string;
   }
 
-  encode(input: string, key?: string): string {
+  async encode(input: string, key?: string): Promise<string> {
+    const { Abracadabra } = await import('abracadabra-cn'); // lazy-load library
     const abra = new Abracadabra();
     abra.Input_Next(input, 'ENCRYPT', key || AbracadabraDecoder.defaultKey);
     return abra.Output() as string;

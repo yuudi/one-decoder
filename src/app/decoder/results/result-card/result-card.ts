@@ -1,8 +1,8 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Component, input, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { DecodeSuccessResult } from '../../../../decoders/decoder';
-import { MatButtonModule } from '@angular/material/button';
-import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-result-card',

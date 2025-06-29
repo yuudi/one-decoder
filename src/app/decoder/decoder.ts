@@ -1,11 +1,11 @@
 import { Component, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DecodingService } from './decodingService';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { Results } from './results/results';
 import { DecodeResult } from '../../decoders/decoder';
+import { DecodingService } from './decodingService';
+import { Results } from './results/results';
 
 @Component({
   selector: 'app-decoder',
