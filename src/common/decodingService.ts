@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Decoder } from '../../decoders/decoder';
+import { Decoder } from '../decoders/decoder';
 
 @Injectable({ providedIn: 'root' })
 export class DecodingService {

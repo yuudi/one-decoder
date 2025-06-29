@@ -7,51 +7,17 @@
     <p>本站是一个开源项目，收集网络上常见的伪装类型解码器</p>
     <p>目前收录的编码类型包括：</p>
     <ul>
-      <li>
-        <a
-          href="https://github.com/CATT-L/MeowTranslator"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          兽音
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/takuron/talk-with-buddha"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          与佛论禅
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/SheepChef/Abracadabra"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          魔曰
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/Ice9Coffee/HoshinoBot/blob/master/hoshino/modules/priconne/cherugo.py"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          切噜语
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/Borber/Whisperer"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          低语者
-        </a>
-      </li>
+      @for (plugin of pluginList; track plugin.id) {
+        <li>
+          @if (plugin.link) {
+            <a [href]="plugin.link" target="_blank" rel="noopener noreferrer">
+              {{ plugin.name }}
+            </a>
+          } @else {
+            {{ plugin.name }}
+          }
+        </li>
+      }
     </ul>
   </mat-card-content>
 </mat-card>

@@ -15,15 +15,16 @@ type DecoderPluginConstructor = new () => DecoderPlugin;
 
 export function getPluginList(): DecoderPluginConstructor[] {
   return [
+    // this order shows in encoder page
     Base64Decoder,
     HexDecoder,
     MorseDecoder,
     BVDecoder,
-    AbracadabraDecoder,
-    BeastDecoder,
     BuddhaDecoder,
+    BeastDecoder,
     CoreValueDecoder,
     CherugoDecoder,
+    AbracadabraDecoder,
     WhispererDecoder,
   ];
 }

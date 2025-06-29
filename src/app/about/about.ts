@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { DecodingService } from '../../common/decodingService';
 
 @Component({
   selector: 'app-about',
@@ -7,4 +8,7 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
-export class About {}
+export class About {
+  private decodeService = inject(DecodingService);
+  pluginList = this.decodeService.getPluginsList();
+}

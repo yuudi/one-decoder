@@ -2,7 +2,7 @@ import { type DecoderPlugin } from '../decoder';
 
 export class BuddhaDecoder implements DecoderPlugin {
   id = 'buddha';
-  name = '佛曰';
+  name = '与佛论禅';
   description = 'takuron版与佛论禅（与佛论禅流传的版本较多，本站无法全部收集）';
   link = 'https://github.com/takuron/talk-with-buddha';
   encoderHelpMessage = '本站使用原作者第二版默认密码："takuron.top"';

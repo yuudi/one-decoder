@@ -3,6 +3,7 @@ import { type DecoderPlugin } from '../decoder';
 export class BeastDecoder implements DecoderPlugin {
   id = 'beast';
   name = '兽音';
+  link = 'https://github.com/SycAlright/beast_sdk';
   needKey = true;
   encoderHelpMessage = '“密钥”部分为字符集，必须为4个字符';
 
