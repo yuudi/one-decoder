@@ -10,8 +10,18 @@
     ></textarea>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>密钥（如果有）</mat-label>
+    <input matInput type="text" [(ngModel)]="key" name="key" />
+  </mat-form-field>
+
   <div class="decode-button-block">
-    <button class="decode-button" matButton="tonal" (click)="decode()">
+    <button
+      class="decode-button"
+      matButton="tonal"
+      (click)="decode()"
+      [disabled]="!input()"
+    >
       解密
     </button>
   </div>

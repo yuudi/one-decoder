@@ -3,7 +3,9 @@ import type Encoder from './lib/gbk';
 
 export class CherugoDecoder implements DecoderPlugin {
   name = '切噜语';
-  description = 'https://pcrbot.github.io/cherugo.js/';
+  link = 'https://pcrbot.github.io/cherugo.js/';
+  needKey = false;
+
   private encoder: Encoder | undefined;
   private async getEncoder() {
     if (!this.encoder) {

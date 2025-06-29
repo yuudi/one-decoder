@@ -2,6 +2,7 @@ import { type DecoderPlugin } from '../decoder';
 
 export class BeastDecoder implements DecoderPlugin {
   name = '兽音';
+  needKey = true;
 
   checkString(input: string, data: { freq: Record<string, number> }): number {
     if (/^[喵嗷呜啊~]+$/.test(input)) {
@@ -38,8 +39,14 @@ export class BeastDecoder implements DecoderPlugin {
     return str;
   }
 
-  encode(input: string): string {
-    const charMap = ['嗷', '呜', '啊', '~'] as const;
+  encode(input: string, key?: string): string {
+    let charMap: [string, string, string, string] = ['嗷', '呜', '啊', '~'];
+    if (key) {
+      if (key.length !== 4) {
+        throw new Error('密钥长度必须为4个字符');
+      }
+      charMap = key.split('') as [string, string, string, string];
+    }
     let hex = '';
     for (let i = 0; i < input.length; i++) {
       hex += ('0000' + input.charCodeAt(i).toString(16)).slice(-4);

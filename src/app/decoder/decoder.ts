@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Decoding } from './decoding';
+import { DecodingService } from './decodingService';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { Results } from './result/results';
+import { Results } from './results/results';
 import { DecodeResult } from '../../decoders/decoder';
 
 @Component({
@@ -20,11 +20,18 @@ import { DecodeResult } from '../../decoders/decoder';
   styleUrl: './decoder.scss',
 })
 export class Decoder {
-  input = '';
-  output: DecodeResult[] | null = null;
-  private decoding = inject(Decoding);
+  input = model('');
+  key = model('');
+  output: Promise<DecodeResult>[] | null = null;
+  private decodeService = inject(DecodingService);
+  private decoding = signal(false);
 
-  async decode() {
-    this.output = await this.decoding.decode(this.input);
+  decode() {
+    if (this.decoding()) return; // Prevent multiple clicks
+    this.decoding.set(true);
+    this.output = this.decodeService.decodeAsync(this.input(), this.key());
+    Promise.allSettled(this.output).then(() => {
+      this.decoding.set(false);
+    });
   }
 }

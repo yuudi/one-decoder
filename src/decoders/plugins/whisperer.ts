@@ -2,7 +2,8 @@ import { type DecoderPlugin } from '../decoder';
 
 export class WhispererDecoder implements DecoderPlugin {
   name = '低语者';
-  description = 'https://github.com/Borber/Whisperer';
+  link = 'https://github.com/Borber/Whisperer';
+  needKey = false;
 
   checkString(input: string): number {
     if (input.startsWith('低语:') || input.startsWith('低语：')) {

@@ -5,10 +5,10 @@ export class Base64Decoder implements DecoderPlugin {
 
   checkString(input: string): number {
     if (/^[a-zA-Z0-9./=\n]+$/.test(input)) {
-      return 99;
+      return 98;
     }
     if (/^[a-zA-Z0-9-_=\n]+$/.test(input)) {
-      return 99;
+      return 98;
     }
 
     return 0; // Low score for other cases

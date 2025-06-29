@@ -5,6 +5,8 @@ type ValueOrPromise<T> = T | Promise<T>;
 export interface DecoderPlugin {
   readonly name: string;
   readonly description?: string;
+  readonly link?: string;
+  readonly needKey?: boolean;
 
   checkString(
     input: string,
@@ -19,11 +21,24 @@ export interface DecoderPlugin {
   encode?(input: string, key?: string): ValueOrPromise<string>;
 }
 
-export interface DecodeResult {
+export interface DecodeSuccessResult {
   name: string;
   description?: string;
   score: number;
   decoded: string;
+}
+
+interface DecodeFailureResult {
+  name: string;
+  description?: string;
+  score: 0;
+}
+
+export type DecodeResult = DecodeSuccessResult | DecodeFailureResult;
+export function isDecodeSuccessResult(
+  result: DecodeResult,
+): result is DecodeSuccessResult {
+  return result.score > 0;
 }
 
 export class Decoder {
@@ -40,10 +55,16 @@ export class Decoder {
     return this.initializedPlugins;
   }
 
-  async decode(input: string, key?: string): Promise<DecodeResult[]> {
+  async decode(input: string, key?: string): Promise<DecodeSuccessResult[]> {
+    const results = await Promise.all(this.decodeAsync(input, key));
+    return results.filter(
+      (result): result is DecodeSuccessResult => result.score > 0,
+    );
+  }
+
+  decodeAsync(input: string, key?: string): Promise<DecodeResult>[] {
     const freq = this.getCharFrequency(input);
-    const results: DecodeResult[] = [];
-    for (const plugin of this.getPlugins()) {
+    return this.getPlugins().map<Promise<DecodeResult>>(async (plugin) => {
       let score;
       try {
         score = await plugin.checkString(input, { key, freq });
@@ -52,7 +73,7 @@ export class Decoder {
           `Error checking string with plugin ${plugin.name}:`,
           error,
         );
-        continue;
+        return { name: plugin.name, score: 0 };
       }
 
       if (score > 0) {
@@ -61,17 +82,18 @@ export class Decoder {
           decoded = await plugin.decode(input, { key });
         } catch (error) {
           console.error(`Error decoding with plugin ${plugin.name}:`, error);
-          continue;
+          return { name: plugin.name, score: 0 };
         }
-        results.push({
+        return {
           name: plugin.name,
           description: plugin.description,
           score,
           decoded,
-        });
+        };
+      } else {
+        return { name: plugin.name, description: plugin.description, score: 0 };
       }
-    }
-    return results;
+    });
   }
 
   private getCharFrequency(input: string): Record<string, number> {

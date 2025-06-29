@@ -3,7 +3,8 @@ import { type DecoderPlugin } from '../../decoder';
 
 export class AbracadabraDecoder implements DecoderPlugin {
   name = '魔曰';
-  description = '官方网站：https://abra.halu.ca/';
+  link = 'https://abra.halu.ca/';
+  needKey = true;
 
   private static defaultKey = 'ABRACADABRA';
 
@@ -21,6 +22,12 @@ export class AbracadabraDecoder implements DecoderPlugin {
     const { key } = data;
     const abra = new Abracadabra();
     abra.Input_Next(input, 'DECRYPT', key || AbracadabraDecoder.defaultKey);
+    return abra.Output() as string;
+  }
+
+  encode(input: string, key?: string): string {
+    const abra = new Abracadabra();
+    abra.Input_Next(input, 'ENCRYPT', key || AbracadabraDecoder.defaultKey);
     return abra.Output() as string;
   }
 }

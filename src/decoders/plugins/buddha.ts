@@ -3,12 +3,22 @@ import CryptoJS from 'crypto-js';
 
 export class BuddhaDecoder implements DecoderPlugin {
   name = '佛曰';
-  description = 'takuron版与佛论禅';
+  description = 'takuron版与佛论禅（与佛论禅流传的版本较多，本站无法全部收集）';
+  link = 'https://github.com/takuron/talk-with-buddha';
+  needKey = true;
 
-  private static defaultPasswords = ['TakuronDotTop', 'hahaka.com'];
+  // different default passwords from different deployments
+  private static readonly defaultPasswords = [
+    'takuron.top',
+    'TakuronDotTop',
+    'hahaka.com',
+  ];
 
   checkString(input: string): number {
     if (input.startsWith('佛曰：')) {
+      return 100;
+    }
+    if (input.startsWith('佛又曰：')) {
       return 100;
     }
     if (input.startsWith('熊曰：')) {
@@ -20,13 +30,17 @@ export class BuddhaDecoder implements DecoderPlugin {
 
   decode(input: string, data: { key?: string }): string {
     const { key } = data;
-    const charset = input.startsWith('佛曰：')
-      ? BuddhaDecoder.buddhaCharset
-      : input.startsWith('熊曰：')
-        ? BuddhaDecoder.bearCharset
-        : null;
+    const charset =
+      input.startsWith('佛曰：') || input.startsWith('佛又曰：')
+        ? BuddhaDecoder.buddhaCharset
+        : input.startsWith('熊曰：')
+          ? BuddhaDecoder.bearCharset
+          : null;
     if (!charset) throw Error('unknown charset');
-    const base64 = input.slice(3).replace(/./, (v) => charset[v]);
+    const content = input.startsWith('佛又曰：')
+      ? input.slice(4)
+      : input.slice(3);
+    const base64 = content.replace(/./, (v) => charset[v]);
     if (key) {
       return CryptoJS.AES.decrypt('U2FsdGVkX1' + base64, key).toString(
         CryptoJS.enc.Utf8,
@@ -34,6 +48,19 @@ export class BuddhaDecoder implements DecoderPlugin {
     } else {
       return this.tryDecrypt('U2FsdGVkX1' + base64);
     }
+  }
+
+  encode(input: string, key?: string): string {
+    const encrypted = CryptoJS.AES.encrypt(
+      input,
+      key || BuddhaDecoder.defaultPasswords[0],
+    ).toString();
+    const offsetData = encrypted.slice(10);
+    const mapped = offsetData.replace(
+      /./g,
+      (v) => BuddhaDecoder.buddhaMap[v] || '？',
+    );
+    return '佛曰：' + mapped;
   }
 
   private tryDecrypt(cipher: string): string {
@@ -44,7 +71,7 @@ export class BuddhaDecoder implements DecoderPlugin {
         continue;
       }
     }
-    throw Error('need password');
+    throw Error('需要密码');
   }
 
   private static bearCharset: Record<string, string> = {
@@ -114,6 +141,7 @@ export class BuddhaDecoder implements DecoderPlugin {
     鳖: '/',
     猩: '=',
   };
+
   private static buddhaCharset: Record<string, string> = {
     啰: 'e',
     羯: 'E',
@@ -180,5 +208,73 @@ export class BuddhaDecoder implements DecoderPlugin {
     咩: '+',
     输: '/',
     漫: '=',
+  };
+
+  private static buddhaMap: Record<string, string> = {
+    e: '啰',
+    E: '羯',
+    t: '婆',
+    T: '提',
+    a: '摩',
+    A: '埵',
+    o: '诃',
+    O: '迦',
+    i: '耶',
+    I: '吉',
+    n: '娑',
+    N: '佛',
+    s: '夜',
+    S: '驮',
+    h: '那',
+    H: '谨',
+    r: '悉',
+    R: '墀',
+    d: '阿',
+    D: '呼',
+    l: '萨',
+    L: '尼',
+    c: '陀',
+    C: '唵',
+    u: '唎',
+    U: '伊',
+    m: '卢',
+    M: '喝',
+    w: '帝',
+    W: '烁',
+    f: '醯',
+    F: '蒙',
+    g: '罚',
+    G: '沙',
+    y: '嚧',
+    Y: '他',
+    p: '南',
+    P: '豆',
+    b: '无',
+    B: '孕',
+    v: '菩',
+    V: '伽',
+    k: '怛',
+    K: '俱',
+    j: '哆',
+    J: '度',
+    x: '皤',
+    X: '阇',
+    q: '室',
+    Q: '地',
+    z: '利',
+    Z: '遮',
+    '0': '穆',
+    '1': '参',
+    '2': '舍',
+    '3': '苏',
+    '4': '钵',
+    '5': '曳',
+    '6': '数',
+    '7': '写',
+    '8': '栗',
+    '9': '楞',
+    '+': '咩',
+    '/': '输',
+    '=': '漫',
   };
 }

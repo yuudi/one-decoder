@@ -1,6 +1,6 @@
 import { Component, input, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { DecodeResult } from '../../../../decoders/decoder';
+import { DecodeSuccessResult } from '../../../../decoders/decoder';
 import { MatButtonModule } from '@angular/material/button';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
@@ -11,7 +11,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
   styleUrl: './result-card.scss',
 })
 export class ResultCard {
-  result = input<DecodeResult>();
+  result = input<DecodeSuccessResult>();
 
   copied = signal(false);
   showCopied() {
