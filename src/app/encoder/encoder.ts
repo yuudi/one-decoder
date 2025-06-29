@@ -5,8 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { EncodeResult } from '../../decoders/decoder';
 import { DecodingService } from '../../common/decodingService';
+import { EncodeResult } from '../../decoders/decoder';
 import { Results } from './results/results';
 
 @Component({

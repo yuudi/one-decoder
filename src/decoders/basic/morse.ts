@@ -3,6 +3,7 @@ import { type DecoderPlugin } from '../decoder';
 export class MorseDecoder implements DecoderPlugin {
   id = 'morse';
   name = '摩斯电码';
+  encoderHelpMessage = '只支持字母和数字，字母不区分大小写';
 
   checkString(input: string): number {
     if (/^[.-/| ]+$/.test(input)) {
@@ -20,7 +21,11 @@ export class MorseDecoder implements DecoderPlugin {
 
   encode(input: string): string {
     const results = [];
-    for (const char of input.split('')) {
+    for (const char of input.toLocaleLowerCase().split('')) {
+      if (char === ' ') {
+        // 忽略空格
+        continue;
+      }
       const code = MorseDecoder.charMap[char];
       if (code === undefined) {
         throw new Error('不支持的字符：' + char);
