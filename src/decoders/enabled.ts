@@ -7,6 +7,7 @@ import { CherugoDecoder } from './plugins/cherugo';
 import { AbracadabraDecoder } from './plugins/abracadabra';
 import { BuddhaDecoder } from './plugins/buddha';
 import { WhispererDecoder } from './plugins/whisperer';
+import { BVDecoder } from './plugins/others/bilibili';
 
 type DecoderPluginConstructor = new () => DecoderPlugin;
 
@@ -14,6 +15,7 @@ export function getPluginList(): DecoderPluginConstructor[] {
   return [
     Base64Decoder,
     HexDecoder,
+    BVDecoder,
     AbracadabraDecoder,
     BeastDecoder,
     BuddhaDecoder,

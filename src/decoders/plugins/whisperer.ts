@@ -1,9 +1,11 @@
 import { type DecoderPlugin } from '../decoder';
 
 export class WhispererDecoder implements DecoderPlugin {
+  id = 'whisperer';
   name = '低语者';
   link = 'https://github.com/Borber/Whisperer';
   needKey = false;
+  encoderHelpMessage = '完整选项请前往官网';
 
   checkString(input: string): number {
     if (input.startsWith('低语:') || input.startsWith('低语：')) {
@@ -32,6 +34,6 @@ export class WhispererDecoder implements DecoderPlugin {
 
   async encode(input: string): Promise<string> {
     const { encode } = await this.getLibrary();
-    return '低语:' + encode(input);
+    return encode(input);
   }
 }

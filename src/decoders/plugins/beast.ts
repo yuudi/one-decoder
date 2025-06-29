@@ -1,8 +1,10 @@
 import { type DecoderPlugin } from '../decoder';
 
 export class BeastDecoder implements DecoderPlugin {
+  id = 'beast';
   name = '兽音';
   needKey = true;
+  encoderHelpMessage = '“密钥”部分为字符集，必须为4个字符';
 
   checkString(input: string, data: { freq: Record<string, number> }): number {
     if (/^[喵嗷呜啊~]+$/.test(input)) {
@@ -46,6 +48,9 @@ export class BeastDecoder implements DecoderPlugin {
         throw new Error('密钥长度必须为4个字符');
       }
       charMap = key.split('') as [string, string, string, string];
+      if (!allDifferent(charMap)) {
+        throw new Error('密钥4个字符必须互不相同');
+      }
     }
     let hex = '';
     for (let i = 0; i < input.length; i++) {
@@ -57,7 +62,7 @@ export class BeastDecoder implements DecoderPlugin {
       const k = (parseInt(hex[i], 16) + (i % 16)) % 16;
       content += charMap[Math.floor(k / 4)] + charMap[k % 4];
     }
-    return `${charMap[0]}${charMap[1]}${charMap[2]}${content}${charMap[3]}`;
+    return `${charMap[3]}${charMap[1]}${charMap[0]}${content}${charMap[2]}`;
   }
 }
 

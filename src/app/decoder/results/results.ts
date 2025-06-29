@@ -1,22 +1,20 @@
 import { Component, input, signal, effect } from '@angular/core';
 import { DecodeResult } from '../../../decoders/decoder';
-import { CommonModule } from '@angular/common';
 import { ResultCard } from './result-card/result-card';
 import {
   FilterFulfilledPromisePipe,
-  FilterSuccessResultPipe,
+  FilterSuccessDecodeResultPipe,
   SortByKeyPipe,
-} from './utils-pipe';
+} from '../../../common/utils-pipe';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-results',
   imports: [
-    CommonModule,
     ResultCard,
     MatProgressBarModule,
     FilterFulfilledPromisePipe,
-    FilterSuccessResultPipe,
+    FilterSuccessDecodeResultPipe,
     SortByKeyPipe,
   ],
   templateUrl: './results.html',

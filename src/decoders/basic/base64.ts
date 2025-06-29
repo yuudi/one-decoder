@@ -1,6 +1,7 @@
 import { type DecoderPlugin } from '../decoder';
 
 export class Base64Decoder implements DecoderPlugin {
+  id = 'base64';
   name = 'Base64';
 
   checkString(input: string): number {

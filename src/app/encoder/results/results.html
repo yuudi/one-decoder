@@ -1,0 +1,15 @@
+<div>
+  @if (results() === null) {
+    <!-- nothing -->
+  } @else {
+    @for (result of (results() | filterFulfilledPromise)(); track result.name) {
+      <app-result-card class="result-card" [result]="result"></app-result-card>
+    }
+
+    @if (!allSettled()) {
+      <div class="loading">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    }
+  }
+</div>

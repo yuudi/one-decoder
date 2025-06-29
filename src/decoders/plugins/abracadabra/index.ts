@@ -2,9 +2,11 @@ import { Abracadabra } from 'abracadabra-cn';
 import { type DecoderPlugin } from '../../decoder';
 
 export class AbracadabraDecoder implements DecoderPlugin {
+  id = 'abracadabra';
   name = '魔曰';
   link = 'https://abra.halu.ca/';
   needKey = true;
+  encoderHelpMessage = '完整选项请前往官网';
 
   private static defaultKey = 'ABRACADABRA';
 

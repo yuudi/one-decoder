@@ -2,9 +2,11 @@ import { type DecoderPlugin } from '../decoder';
 import CryptoJS from 'crypto-js';
 
 export class BuddhaDecoder implements DecoderPlugin {
+  id = 'buddha';
   name = '佛曰';
   description = 'takuron版与佛论禅（与佛论禅流传的版本较多，本站无法全部收集）';
   link = 'https://github.com/takuron/talk-with-buddha';
+  encoderHelpMessage = '本站使用原作者第二版默认密码："takuron.top"';
   needKey = true;
 
   // different default passwords from different deployments
@@ -28,7 +30,7 @@ export class BuddhaDecoder implements DecoderPlugin {
     return 0;
   }
 
-  decode(input: string, data: { key?: string }): string {
+  async decode(input: string, data: { key?: string }): Promise<string> {
     const { key } = data;
     const charset =
       input.startsWith('佛曰：') || input.startsWith('佛又曰：')
@@ -40,17 +42,30 @@ export class BuddhaDecoder implements DecoderPlugin {
     const content = input.startsWith('佛又曰：')
       ? input.slice(4)
       : input.slice(3);
-    const base64 = content.replace(/./, (v) => charset[v]);
+    const base64 = content.replace(/./g, (v) => charset[v]);
     if (key) {
       return CryptoJS.AES.decrypt('U2FsdGVkX1' + base64, key).toString(
         CryptoJS.enc.Utf8,
       );
     } else {
-      return this.tryDecrypt('U2FsdGVkX1' + base64);
+      for (const possibleKey of BuddhaDecoder.defaultPasswords) {
+        try {
+          console.debug('佛曰：try password: ' + possibleKey);
+          const result = CryptoJS.AES.decrypt(
+            'U2FsdGVkX1' + base64,
+            possibleKey,
+          ).toString(CryptoJS.enc.Utf8);
+          if (result.length === 0) continue;
+          return result;
+        } catch {
+          continue;
+        }
+      }
+      throw new Error('需要密码');
     }
   }
 
-  encode(input: string, key?: string): string {
+  async encode(input: string, key?: string): Promise<string> {
     const encrypted = CryptoJS.AES.encrypt(
       input,
       key || BuddhaDecoder.defaultPasswords[0],
@@ -61,17 +76,6 @@ export class BuddhaDecoder implements DecoderPlugin {
       (v) => BuddhaDecoder.buddhaMap[v] || '？',
     );
     return '佛曰：' + mapped;
-  }
-
-  private tryDecrypt(cipher: string): string {
-    for (const key of BuddhaDecoder.defaultPasswords) {
-      try {
-        return CryptoJS.AES.decrypt(cipher, key).toString(CryptoJS.enc.Utf8);
-      } catch {
-        continue;
-      }
-    }
-    throw Error('需要密码');
   }
 
   private static bearCharset: Record<string, string> = {

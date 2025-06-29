@@ -1,6 +1,7 @@
 import { type DecoderPlugin } from '../decoder';
 
 export class HexDecoder implements DecoderPlugin {
+  id = 'hex';
   name = '16进制';
 
   checkString(input: string): number {

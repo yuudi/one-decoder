@@ -24,7 +24,7 @@ export class Decoder {
   key = model('');
   output: Promise<DecodeResult>[] | null = null;
   private decodeService = inject(DecodingService);
-  private decoding = signal(false);
+  decoding = signal(false);
 
   decode() {
     if (this.decoding()) return; // Prevent multiple clicks

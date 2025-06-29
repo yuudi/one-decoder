@@ -4,7 +4,7 @@
   } @else {
     @let resultDisplayList =
       (results() | filterFulfilledPromise)()
-        | filterSuccessResult
+        | filterSuccessDecodeResult
         | sortByKey: "score" : true;
 
     @if (allSettled()) {

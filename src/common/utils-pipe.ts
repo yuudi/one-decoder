@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, signal, Signal } from '@angular/core';
-import { DecodeResult, isDecodeSuccessResult } from '../../../decoders/decoder';
+import { DecodeResult, isDecodeSuccessResult } from '../decoders/decoder';
 
 @Pipe({
   name: 'filterFulfilledPromise',
@@ -20,8 +20,8 @@ export class FilterFulfilledPromisePipe<T> implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'filterSuccessResult' })
-export class FilterSuccessResultPipe implements PipeTransform {
+@Pipe({ name: 'filterSuccessDecodeResult' })
+export class FilterSuccessDecodeResultPipe implements PipeTransform {
   transform(value: DecodeResult[] | null) {
     if (!value) {
       return [];

@@ -20,7 +20,7 @@
       class="decode-button"
       matButton="tonal"
       (click)="decode()"
-      [disabled]="!input()"
+      [disabled]="!input() || decoding()"
     >
       解密
     </button>

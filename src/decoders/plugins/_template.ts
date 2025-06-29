@@ -1,6 +1,7 @@
 import { type DecoderPlugin } from '../decoder';
 
 export class NewDecoder implements DecoderPlugin {
+  id = 'new-decoder';
   name = 'New Decoder Plugin';
 
   checkString(input: string): number {

@@ -1,0 +1,73 @@
+<form class="encoder-form">
+  <mat-form-field class="plain-input">
+    <mat-label>明文</mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="5"
+      [(ngModel)]="input"
+      name="input"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-selection-list
+    [(ngModel)]="selectedPlugin"
+    name="selectedPlugin"
+    class="plugin-selection-list"
+  >
+    @for (plugin of plugins; track plugin.id) {
+      @if (plugin.encode) {
+        <mat-list-option
+          [value]="plugin.id"
+          [disabled]="useKey() && !plugin.needKey"
+        >
+          <div matListItemTitle>{{ plugin.name }}</div>
+          @if (plugin.encoderHelpMessage) {
+            <div matListItemLine>{{ plugin.encoderHelpMessage }}</div>
+          }
+        </mat-list-option>
+      }
+    }
+  </mat-selection-list>
+
+  <div class="key-settings-block">
+    <mat-slide-toggle
+      [(ngModel)]="useKey"
+      name="useKey"
+      class="key-settings-usekey"
+    >
+      使用密钥
+    </mat-slide-toggle>
+
+    <mat-form-field>
+      <mat-label>密钥</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="key"
+        name="key"
+        [disabled]="!useKey()"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="encode-button-block">
+    <button
+      class="encode-button"
+      matButton="tonal"
+      (click)="encode()"
+      [disabled]="
+        !input() ||
+        (useKey() && !key()) ||
+        selectedPlugin().length === 0 ||
+        encoding()
+      "
+    >
+      编码
+    </button>
+  </div>
+</form>
+
+<div class="encoder-results">
+  <app-results [results]="output"></app-results>
+</div>

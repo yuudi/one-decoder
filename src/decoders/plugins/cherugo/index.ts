@@ -2,6 +2,7 @@ import { DecoderPlugin } from '../../decoder';
 import type Encoder from './lib/gbk';
 
 export class CherugoDecoder implements DecoderPlugin {
+  id = 'cherugo';
   name = '切噜语';
   link = 'https://pcrbot.github.io/cherugo.js/';
   needKey = false;

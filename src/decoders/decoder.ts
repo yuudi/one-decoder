@@ -2,12 +2,17 @@ import { getPluginList } from './enabled';
 
 type ValueOrPromise<T> = T | Promise<T>;
 
-export interface DecoderPlugin {
+interface DecoderPluginInfo {
+  readonly id: string;
   readonly name: string;
   readonly description?: string;
   readonly link?: string;
   readonly needKey?: boolean;
+  readonly encoderHelpMessage?: string;
+  readonly hide?: boolean;
+}
 
+export interface DecoderPlugin extends DecoderPluginInfo {
   checkString(
     input: string,
     data: Readonly<{ key?: string; freq: Record<string, number> }>,
@@ -39,6 +44,27 @@ export function isDecodeSuccessResult(
   result: DecodeResult,
 ): result is DecodeSuccessResult {
   return result.score > 0;
+}
+
+export interface EncodeSuccessResult {
+  name: string;
+  description?: string;
+  error: undefined;
+  encoded: string;
+}
+
+interface EncodeFailureResult {
+  name: string;
+  description?: string;
+  error: string;
+  encoded: undefined;
+}
+
+export type EncodeResult = EncodeSuccessResult | EncodeFailureResult;
+export function isEncodeSuccessResult(
+  result: EncodeResult,
+): result is EncodeSuccessResult {
+  return (result as EncodeFailureResult).error === undefined;
 }
 
 export class Decoder {
@@ -104,35 +130,62 @@ export class Decoder {
     return freq;
   }
 
-  getPluginsList() {
-    return this.getPlugins().map((plugin, index) => ({
-      id: index,
-      name: plugin.name,
-      description: plugin.description,
-      encoderAvailable: !!plugin.encode,
-    }));
+  getPluginsList(): DecoderPlugin[] {
+    return this.getPlugins().filter((plugin) => !plugin.hide);
   }
 
-  private getPluginById(id: number): DecoderPlugin | undefined {
+  private getPluginById(id: string): DecoderPlugin | undefined {
     const plugins = this.getPlugins();
-    return plugins[id] || undefined;
+    return plugins.find((p) => p.id === id);
   }
 
   async encode(
-    id: number,
+    ids: string[],
     input: string,
     key?: string,
-  ): Promise<string | undefined> {
+  ): Promise<EncodeResult[]> {
+    return await Promise.all(this.encodeAsync(ids, input, key));
+  }
+
+  encodeAsync(
+    ids: string[],
+    input: string,
+    key?: string,
+  ): Promise<EncodeResult>[] {
+    return ids.map((id) => this.encodeById(id, input, key));
+  }
+
+  private async encodeById(
+    id: string,
+    input: string,
+    key?: string,
+  ): Promise<EncodeResult> {
     const plugin = this.getPluginById(id);
     if (!plugin || !plugin.encode) {
       console.error(`Encoder not available for plugin ID ${id}`);
-      return undefined;
+      return {
+        name: plugin ? plugin.name : `Plugin ID ${id}`,
+        description: plugin?.description,
+        error: 'Encoder not available',
+        encoded: undefined,
+      };
     }
     try {
-      return await plugin.encode(input, key);
+      const encoded = await plugin.encode(input, key);
+      return {
+        name: plugin.name,
+        description: plugin.description,
+        encoded,
+        error: undefined,
+      };
     } catch (error) {
       console.error(`Error encoding with plugin ${plugin.name}:`, error);
-      return undefined;
+      return {
+        name: plugin.name,
+        description: plugin.description,
+        error: error instanceof Error ? error.message : String(error),
+        encoded: undefined,
+      };
     }
   }
 }

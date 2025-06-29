@@ -1,0 +1,27 @@
+.encoder-form,
+.encoder-results {
+  max-width: 40em;
+  width: 90%;
+  margin: 2em auto;
+}
+
+.plain-input {
+  width: 100%;
+}
+
+.plugin-selection-list {
+  width: 80%;
+  margin: 0 auto;
+}
+.key-settings-block {
+  display: flex;
+  align-items: center;
+  > .key-settings-usekey {
+    margin: 0 1em;
+  }
+}
+
+.decode-button-block {
+  display: flex;
+  justify-content: center;
+}

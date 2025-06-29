@@ -1,6 +1,6 @@
 import {
   FilterFulfilledPromisePipe,
-  FilterSuccessResultPipe,
+  FilterSuccessDecodeResultPipe,
   SortByKeyPipe,
 } from './utils-pipe';
 
@@ -10,9 +10,10 @@ describe('FilterFulfilledPromisePipe', () => {
     expect(pipe).toBeTruthy();
   });
 });
+
 describe('FilterSuccessResultPipe', () => {
   it('create an instance', () => {
-    const pipe = new FilterSuccessResultPipe();
+    const pipe = new FilterSuccessDecodeResultPipe();
     expect(pipe).toBeTruthy();
   });
 });
