@@ -23,9 +23,7 @@ export class App {
   constructor() {
     this.iconRegistry.addSvgIcon(
       'github',
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        'assets/icons/github-mark.svg',
-      ),
+      this.sanitizer.bypassSecurityTrustResourceUrl('icons/github-mark.svg'),
       { viewBox: '0 0 98 96' },
     );
   }
