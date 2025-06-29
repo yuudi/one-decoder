@@ -1,4 +1,4 @@
-import { Component, inject, model, signal } from '@angular/core';
+import { Component, effect, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,6 +32,31 @@ export class Encoder {
   private decodeService = inject(DecodingService);
   plugins = this.decodeService.getPluginsList();
   encoding = signal(false);
+
+  constructor() {
+    this.setupSelectedPluginStorage();
+  }
+
+  private readonly selectedPluginStorageKey =
+    'one-revealer.encoder.selectedPlugin';
+  private setupSelectedPluginStorage() {
+    //save to storage
+    effect(() => {
+      localStorage.setItem(
+        this.selectedPluginStorageKey,
+        JSON.stringify(this.selectedPlugin()),
+      );
+    });
+
+    // restore from storage
+    const savedSelectedJson = localStorage.getItem(
+      this.selectedPluginStorageKey,
+    );
+    if (savedSelectedJson) {
+      const savedSelected = JSON.parse(savedSelectedJson);
+      this.selectedPlugin.set(savedSelected);
+    }
+  }
 
   encode() {
     if (this.encoding()) return; // Prevent multiple clicks
