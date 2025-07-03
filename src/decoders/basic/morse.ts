@@ -1,4 +1,5 @@
-import { type DecoderPlugin } from '../decoder';
+import { EncodeError, EncodeErrorCode } from '../errors';
+import { type DecoderPlugin } from '../types';
 
 export class MorseDecoder implements DecoderPlugin {
   id = 'morse';
@@ -28,7 +29,9 @@ export class MorseDecoder implements DecoderPlugin {
       }
       const code = MorseDecoder.charMap[char];
       if (code === undefined) {
-        throw new Error('不支持的字符：' + char);
+        throw new EncodeError('不支持的字符：' + char, {
+          code: EncodeErrorCode.InvalidInput,
+        });
       }
       results.push(code);
     }

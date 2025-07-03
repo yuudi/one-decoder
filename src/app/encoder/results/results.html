@@ -1,15 +1,19 @@
 <div>
-  @if (results() === null) {
-    <!-- nothing -->
-  } @else {
-    @for (result of (results() | filterFulfilledPromise)(); track result.name) {
-      <app-result-card class="result-card" [result]="result"></app-result-card>
-    }
-
-    @if (!allSettled()) {
+  @for (result of resultsList(); track $index) {
+    @if (result === null) {
       <div class="loading">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
       </div>
+    } @else if (isResultSuccess(result)) {
+      <app-result-success-card
+        class="result-card"
+        [result]="result"
+      ></app-result-success-card>
+    } @else {
+      <app-result-error-card
+        class="result-card"
+        [result]="result"
+      ></app-result-error-card>
     }
   }
 </div>

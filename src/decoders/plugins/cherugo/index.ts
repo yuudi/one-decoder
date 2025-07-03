@@ -1,4 +1,4 @@
-import { DecoderPlugin } from '../../decoder';
+import { type DecoderPlugin } from '../../types';
 import type Encoder from './lib/gbk';
 
 export class CherugoDecoder implements DecoderPlugin {

@@ -1,10 +1,11 @@
 import { decode, encode, zeroWidthDict } from 'zero-width-lib';
-import { type DecoderPlugin } from '../../decoder';
+import { EncodeError, EncodeErrorCode } from '../../errors';
+import { type DecoderPlugin } from '../../types';
 
 export class ZeroWidthDecoder implements DecoderPlugin {
   id = 'zero-width';
   name = '零宽';
-  link = 'https://github.com/yuanfux/zero-width-lib';
+  link = 'https://yuanfux.github.io/zero-width-web/';
   needKey = true;
   encoderHelpMessage =
     '“密钥”处填明文。某些软件可能显示或删除零宽字符，请自行测试。';
@@ -24,10 +25,14 @@ export class ZeroWidthDecoder implements DecoderPlugin {
 
   encode(input: string, key?: string): string {
     if (!key) {
-      throw Error('请在“密钥”处填写明文');
+      throw new EncodeError('请在“密钥”处填写明文', {
+        code: EncodeErrorCode.InvalidKey,
+      });
     }
     if (key.length < 2) {
-      throw Error('明文长度至少为2字符');
+      throw new EncodeError('明文长度至少为2字符', {
+        code: EncodeErrorCode.InvalidKey,
+      });
     }
     return encode(key, input);
   }

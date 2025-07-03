@@ -28,5 +28,7 @@
 </form>
 
 <div class="decoder-results">
-  <app-results [results]="output"></app-results>
+  @if (output) {
+    <app-results [results]="output" [hasKey]="outputHasKey()"></app-results>
+  }
 </div>

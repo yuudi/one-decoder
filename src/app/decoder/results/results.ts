@@ -1,38 +1,58 @@
-import { Component, effect, input, signal } from '@angular/core';
+import { Component, computed, effect, input, signal } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DecodeErrorCode } from '../../../decoders/errors';
 import {
-  FilterFulfilledPromisePipe,
-  FilterSuccessDecodeResultPipe,
-  SortByKeyPipe,
-} from '../../../common/utils-pipe';
-import { DecodeResult } from '../../../decoders/decoder';
+  isDecodeSuccessResult,
+  type DecodeResult,
+} from '../../../decoders/types';
 import { ResultCard } from './result-card/result-card';
 
 @Component({
   selector: 'app-results',
-  imports: [
-    ResultCard,
-    MatProgressBarModule,
-    FilterFulfilledPromisePipe,
-    FilterSuccessDecodeResultPipe,
-    SortByKeyPipe,
-  ],
+  imports: [ResultCard, MatProgressBarModule],
   templateUrl: './results.html',
   styleUrl: './results.scss',
 })
 export class Results {
-  results = input<Promise<DecodeResult>[] | null>(null);
-  allSettled = signal(true);
+  results = input.required<Promise<DecodeResult>[]>();
+  hasKey = input(false);
+  inputSeq = 0;
+  resultsList = signal<(DecodeResult | null)[]>([]);
+  resultDisplayList = computed(() =>
+    this.resultsList()
+      .filter((r) => r !== null && isDecodeSuccessResult(r))
+      .toSorted((a, b) => b.score - a.score),
+  );
+  allSettled = computed(() => this.resultsList().every((r) => r !== null));
+  hasInvalidKeyError = computed(() =>
+    this.resultsList().find(
+      (decodeResult) =>
+        decodeResult &&
+        !isDecodeSuccessResult(decodeResult) &&
+        decodeResult.errorCode === DecodeErrorCode.InvalidKey,
+    ),
+  );
 
   constructor() {
     effect(() => {
-      const res = this.results();
-      if (res) {
-        this.allSettled.set(false);
-        Promise.allSettled(res).then(() => {
-          this.allSettled.set(true);
+      const resultPromises = this.results();
+      this.inputSeq += 1;
+
+      const currentSeq = this.inputSeq;
+      this.resultsList.set(
+        Array<DecodeResult | null>(resultPromises.length).fill(null),
+      );
+      resultPromises.forEach((result, i) => {
+        result.then((value) => {
+          if (currentSeq === this.inputSeq /* to prevent update old result */) {
+            this.resultsList.update((resultStatus) => {
+              const newStatus = resultStatus.slice();
+              newStatus[i] = value;
+              return newStatus;
+            });
+          }
         });
-      }
+      });
     });
   }
 }

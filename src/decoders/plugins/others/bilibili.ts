@@ -1,4 +1,5 @@
-import { type DecoderPlugin } from '../../decoder';
+import { DecodeError, DecodeErrorCode } from '../../errors';
+import { type DecoderPlugin } from '../../types';
 
 export class BVDecoder implements DecoderPlugin {
   id = 'bilibili.bv';
@@ -61,6 +62,8 @@ export class BVDecoder implements DecoderPlugin {
     if (input.startsWith('av')) {
       return 'https://www.bilibili.com/video/' + input;
     }
-    throw new Error('不支持的格式');
+    throw new DecodeError('不支持的格式', {
+      code: DecodeErrorCode.Unknown,
+    });
   }
 }

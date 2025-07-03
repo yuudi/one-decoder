@@ -69,5 +69,7 @@
 </form>
 
 <div class="encoder-results">
-  <app-results [results]="output"></app-results>
+  @if (output) {
+    <app-results [results]="output"></app-results>
+  }
 </div>

@@ -1,4 +1,4 @@
-import { type DecoderPlugin } from '../../decoder';
+import { type DecoderPlugin } from '../../types';
 
 class MagnetDecoder implements DecoderPlugin {
   id = 'magnet';

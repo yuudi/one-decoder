@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DecodingService } from '../../common/decodingService';
-import { EncodeResult } from '../../decoders/decoder';
+import { type EncodeResult } from '../../decoders/types';
 import { Results } from './results/results';
 
 @Component({

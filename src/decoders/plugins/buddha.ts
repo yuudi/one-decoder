@@ -1,10 +1,11 @@
-import { type DecoderPlugin } from '../decoder';
+import { DecodeError, DecodeErrorCode } from '../errors';
+import { type DecoderPlugin } from '../types';
 
 export class BuddhaDecoder implements DecoderPlugin {
   id = 'buddha';
   name = '与佛论禅';
   description = 'takuron版与佛论禅（与佛论禅流传的版本较多，本站无法全部收集）';
-  link = 'https://github.com/takuron/talk-with-buddha';
+  link = 'https://tools.takuron.com/talk-with-buddha/';
   encoderHelpMessage = '本站使用原作者第二版默认密码："takuron.top"';
   needKey = true;
 
@@ -38,7 +39,11 @@ export class BuddhaDecoder implements DecoderPlugin {
         : input.startsWith('熊曰：')
           ? BuddhaDecoder.bearCharset
           : null;
-    if (!charset) throw Error('unknown charset');
+    if (!charset) {
+      throw new DecodeError('unknown charset', {
+        code: DecodeErrorCode.Unknown,
+      });
+    }
     const content = input.startsWith('佛又曰：')
       ? input.slice(4)
       : input.slice(3);
@@ -61,7 +66,7 @@ export class BuddhaDecoder implements DecoderPlugin {
           continue;
         }
       }
-      throw new Error('需要密码');
+      throw new DecodeError('需要密码', { code: DecodeErrorCode.InvalidKey });
     }
   }
 

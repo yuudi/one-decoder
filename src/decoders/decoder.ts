@@ -1,71 +1,16 @@
 import { getPluginList } from './enabled';
-
-type ValueOrPromise<T> = T | Promise<T>;
-
-interface DecoderPluginInfo {
-  readonly id: string;
-  readonly name: string;
-  readonly description?: string;
-  readonly link?: string;
-  readonly needKey?: boolean;
-  readonly encoderHelpMessage?: string;
-  readonly hide?: boolean;
-}
-
-export interface DecoderPlugin extends DecoderPluginInfo {
-  checkString(
-    input: string,
-    data: Readonly<{ key?: string; freq: Record<string, number> }>,
-  ): ValueOrPromise<number>;
-
-  decode(
-    input: string,
-    data: Readonly<{ key?: string }>,
-  ): ValueOrPromise<string>;
-
-  encode?(input: string, key?: string): ValueOrPromise<string>;
-}
-
-export interface DecodeSuccessResult {
-  name: string;
-  description?: string;
-  score: number;
-  decoded: string;
-}
-
-interface DecodeFailureResult {
-  name: string;
-  description?: string;
-  score: 0;
-}
-
-export type DecodeResult = DecodeSuccessResult | DecodeFailureResult;
-export function isDecodeSuccessResult(
-  result: DecodeResult,
-): result is DecodeSuccessResult {
-  return result.score > 0;
-}
-
-export interface EncodeSuccessResult {
-  name: string;
-  description?: string;
-  error: undefined;
-  encoded: string;
-}
-
-interface EncodeFailureResult {
-  name: string;
-  description?: string;
-  error: string;
-  encoded: undefined;
-}
-
-export type EncodeResult = EncodeSuccessResult | EncodeFailureResult;
-export function isEncodeSuccessResult(
-  result: EncodeResult,
-): result is EncodeSuccessResult {
-  return (result as EncodeFailureResult).error === undefined;
-}
+import {
+  DecodeError,
+  DecodeErrorCode,
+  EncodeError,
+  EncodeErrorCode,
+} from './errors';
+import type {
+  DecodeResult,
+  DecoderPlugin,
+  DecodeSuccessResult,
+  EncodeResult,
+} from './types';
 
 export class Decoder {
   private plugins = getPluginList();
@@ -99,7 +44,14 @@ export class Decoder {
           `Error checking string with plugin ${plugin.name}:`,
           error,
         );
-        return { name: plugin.name, score: 0 };
+        return {
+          name: plugin.name,
+          description: plugin.description,
+          score: 0,
+          errorCode:
+            error instanceof DecodeError ? error.code : DecodeErrorCode.Unknown,
+          errorMessage: error instanceof Error ? error.message : String(error),
+        };
       }
 
       if (score > 0) {
@@ -108,7 +60,17 @@ export class Decoder {
           decoded = await plugin.decode(input, { key });
         } catch (error) {
           console.error(`Error decoding with plugin ${plugin.name}:`, error);
-          return { name: plugin.name, score: 0 };
+          return {
+            name: plugin.name,
+            description: plugin.description,
+            score,
+            errorCode:
+              error instanceof DecodeError
+                ? error.code
+                : DecodeErrorCode.Unknown,
+            errorMessage:
+              error instanceof Error ? error.message : String(error),
+          };
         }
         return {
           name: plugin.name,
@@ -117,7 +79,13 @@ export class Decoder {
           decoded,
         };
       } else {
-        return { name: plugin.name, description: plugin.description, score: 0 };
+        return {
+          name: plugin.name,
+          description: plugin.description,
+          score,
+          errorCode: DecodeErrorCode.DecoderSkipped,
+          errorMessage: 'scores 0, skipped',
+        };
       }
     });
   }
@@ -166,8 +134,8 @@ export class Decoder {
       return {
         name: plugin ? plugin.name : `Plugin ID ${id}`,
         description: plugin?.description,
-        error: 'Encoder not available',
-        encoded: undefined,
+        errorCode: EncodeErrorCode.EncoderIdNotFound,
+        errorMessage: 'Encoder not available',
       };
     }
     try {
@@ -176,15 +144,15 @@ export class Decoder {
         name: plugin.name,
         description: plugin.description,
         encoded,
-        error: undefined,
       };
     } catch (error) {
       console.error(`Error encoding with plugin ${plugin.name}:`, error);
       return {
         name: plugin.name,
         description: plugin.description,
-        error: error instanceof Error ? error.message : String(error),
-        encoded: undefined,
+        errorCode:
+          error instanceof EncodeError ? error.code : EncodeErrorCode.Unknown,
+        errorMessage: error instanceof Error ? error.message : String(error),
       };
     }
   }

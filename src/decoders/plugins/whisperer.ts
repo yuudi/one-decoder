@@ -1,4 +1,4 @@
-import { type DecoderPlugin } from '../decoder';
+import { type DecoderPlugin } from '../types';
 
 export class WhispererDecoder implements DecoderPlugin {
   id = 'whisperer';

@@ -2,7 +2,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Component, input, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { DecodeSuccessResult } from '../../../../decoders/decoder';
+import { type DecodeSuccessResult } from '../../../../decoders/types';
 
 @Component({
   selector: 'app-result-card',
@@ -11,7 +11,7 @@ import { DecodeSuccessResult } from '../../../../decoders/decoder';
   styleUrl: './result-card.scss',
 })
 export class ResultCard {
-  result = input<DecodeSuccessResult>();
+  result = input.required<DecodeSuccessResult>();
 
   copied = signal(false);
   showCopied() {

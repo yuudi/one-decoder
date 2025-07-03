@@ -1,4 +1,5 @@
-import { type DecoderPlugin } from '../decoder';
+import { EncodeError, EncodeErrorCode } from '../errors';
+import { type DecoderPlugin } from '../types';
 
 export class BeastDecoder implements DecoderPlugin {
   id = 'beast';
@@ -46,11 +47,15 @@ export class BeastDecoder implements DecoderPlugin {
     let charMap: [string, string, string, string] = ['嗷', '呜', '啊', '~'];
     if (key) {
       if (key.length !== 4) {
-        throw new Error('密钥长度必须为4个字符');
+        throw new EncodeError('密钥长度必须为4个字符', {
+          code: EncodeErrorCode.InvalidKey,
+        });
       }
       charMap = key.split('') as [string, string, string, string];
       if (!allDifferent(charMap)) {
-        throw new Error('密钥4个字符必须互不相同');
+        throw new EncodeError('密钥4个字符必须互不相同', {
+          code: EncodeErrorCode.InvalidKey,
+        });
       }
     }
     let hex = '';
@@ -64,6 +69,21 @@ export class BeastDecoder implements DecoderPlugin {
       content += charMap[Math.floor(k / 4)] + charMap[k % 4];
     }
     return `${charMap[3]}${charMap[1]}${charMap[0]}${content}${charMap[2]}`;
+  }
+}
+
+export class BeastNoEmbedDecoder extends BeastDecoder {
+  override name = '兽音（旧版）';
+  hide = true;
+  override checkString(input: string): number {
+    if (/^[嗷呜啊~]+$/.test(input)) {
+      return 99;
+    }
+    return 0;
+  }
+
+  override decode(input: string): string {
+    return super.decode(`~呜嗷${input}啊`);
   }
 }
 

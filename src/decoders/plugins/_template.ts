@@ -1,4 +1,4 @@
-import { type DecoderPlugin } from '../decoder';
+import { type DecoderPlugin } from '../types';
 
 export class NewDecoder implements DecoderPlugin {
   id = 'new-decoder';

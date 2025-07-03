@@ -1,21 +1,16 @@
 <mat-card>
   <mat-card-header class="result-header">
     <mat-card-title class="result-name"> {{ result().name }} </mat-card-title>
-    @if (result().description; as description) {
-      <mat-card-subtitle class="result-description">
-        {{ description }}
-      </mat-card-subtitle>
-    }
   </mat-card-header>
 
   <mat-card-content>
-    <p class="result-content">{{ result().decoded }}</p>
+    <p class="result-content">{{ result().encoded }}</p>
   </mat-card-content>
 
   <mat-card-actions>
     <button
       matButton="tonal"
-      [cdkCopyToClipboard]="result().decoded"
+      [cdkCopyToClipboard]="result().encoded"
       (click)="showCopied()"
     >
       @if (copied()) {

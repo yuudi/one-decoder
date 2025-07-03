@@ -1,35 +1,35 @@
 <div>
-  @if (results() === null) {
-    <!-- nothing -->
-  } @else {
-    @let resultDisplayList =
-      (results() | filterFulfilledPromise)()
-        | filterSuccessDecodeResult
-        | sortByKey: "score" : true;
-
-    @if (allSettled()) {
-      @if (resultDisplayList.length === 0) {
-        <div class="no-result">
-          <h2>没有结果</h2>
-          <p>
-            本站收录的解码器均无法解读这段文字，如果你认为有需要增加的解码器，请联系我们
-          </p>
-        </div>
-      } @else if (resultDisplayList.length === 1) {
-        <h2>解码结果</h2>
-      } @else {
-        <h2>解码结果</h2>
-        <p>多个可能的结果，请您核对</p>
-      }
-    }
-    @for (result of resultDisplayList; track result.name) {
-      <app-result-card class="result-card" [result]="result"></app-result-card>
-    }
-
-    @if (!allSettled()) {
-      <div class="loading">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  @if (allSettled()) {
+    @if (resultDisplayList().length === 0) {
+      <div class="no-result">
+        <h2>没有结果</h2>
+        <p>
+          @if (hasInvalidKeyError()) {
+            @if (hasKey()) {
+              此密钥无效。
+            } @else {
+              无法解码，有可能是缺少密钥。
+            }
+          } @else {
+            所有解码器均无法解读。
+          }
+        </p>
+        <p>如果你有要补充的解码器，请联系我们</p>
       </div>
+    } @else if (resultDisplayList().length === 1) {
+      <h2>解码结果</h2>
+    } @else {
+      <h2>解码结果</h2>
+      <p>多个可能的结果，请您核对</p>
     }
+  }
+  @for (result of resultDisplayList(); track $index) {
+    <app-result-card class="result-card" [result]="result"></app-result-card>
+  }
+
+  @if (!allSettled()) {
+    <div class="loading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
   }
 </div>
