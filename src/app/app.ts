@@ -29,7 +29,7 @@ export class App {
   }
 
   share() {
-    navigator.share({
+    void navigator.share({
       title: '统一解码',
       url: window.location.href,
     });

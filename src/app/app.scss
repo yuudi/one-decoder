@@ -1,3 +1,16 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.title-row {
+  display: none;
+}
+
+@media (max-width: 499px) {
+  .title-row {
+    display: block;
+  }
+  .title-inline {
+    display: none;
+  }
+}

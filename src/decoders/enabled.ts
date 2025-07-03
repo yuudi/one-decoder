@@ -13,6 +13,7 @@ import { CoreValueDecoder } from './plugins/core-value';
 import { BVDecoder } from './plugins/others/bilibili';
 import { MysteryCodeDecoders } from './plugins/others/mystery-codes';
 import { WhispererDecoder } from './plugins/whisperer';
+import { ZeroWidthDecoder } from './plugins/zero-width';
 
 type DecoderPluginConstructor = new () => DecoderPlugin;
 
@@ -28,6 +29,7 @@ export function getPluginList(): DecoderPluginConstructor[] {
     BuddhaDecoder,
     BeastDecoder,
     CoreValueDecoder,
+    ZeroWidthDecoder,
     CherugoDecoder,
     AbracadabraDecoder,
     WhispererDecoder,
