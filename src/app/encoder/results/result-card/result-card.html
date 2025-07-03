@@ -6,9 +6,12 @@
 
     @if (res.error) {
       <mat-card-content>
-        <p class="result-error">
-          {{ res.error }}
-        </p>
+        <div class="result-error">
+          <mat-icon fontIcon="error"></mat-icon>
+          <p>
+            {{ res.error }}
+          </p>
+        </div>
       </mat-card-content>
     } @else if (res.encoded) {
       <mat-card-content>

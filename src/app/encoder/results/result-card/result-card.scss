@@ -9,4 +9,6 @@
 
 .result-error {
   color: var(--mat-sys-error);
+  display: flex;
+  align-items: center;
 }

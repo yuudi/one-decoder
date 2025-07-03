@@ -7,7 +7,7 @@ export class ZeroWidthDecoder implements DecoderPlugin {
   link = 'https://github.com/yuanfux/zero-width-lib';
   needKey = true;
   encoderHelpMessage =
-    '“密钥”处填明文，至少为2个字符。最终结果在不同软件中可能被显示或者被删除，请自行测试';
+    '“密钥”处填明文。某些软件可能显示或删除零宽字符，请自行测试。';
 
   checkString(input: string): number {
     const charset = Object.values(zeroWidthDict);
