@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export const memory: WebAssembly.Memory;
-export const decode: (a: number, b: number) => [number, number, number, number];
-export const encode: (a: number, b: number) => [number, number, number, number];
+export const decode: (a: number, b: number, c: number, d: number) => [number, number, number, number];
+export const encode: (a: number, b: number, c: number, d: number) => [number, number, number, number];
 export const set_panic_hook: () => void;
 export const rust_zstd_wasm_shim_qsort: (a: number, b: number, c: number, d: number) => void;
 export const rust_zstd_wasm_shim_malloc: (a: number) => number;

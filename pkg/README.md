@@ -21,3 +21,10 @@ console.log(encoded);
 const decoded = decode(encoded);
 console.log(decoded);
 ```
+
+### build
+
+```sh
+cargo install wasm-pack
+wasm-pack build
+```
