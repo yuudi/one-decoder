@@ -10,6 +10,17 @@
     ></textarea>
   </mat-form-field>
 
+  <div class="plugin-selectall-checkbox-container">
+    <div class="spacer"></div>
+    <mat-checkbox
+      [checked]="selectedAllStatus() === 'checked'"
+      [indeterminate]="selectedAllStatus() === 'indeterminate'"
+      (change)="selectAllCheckboxChange($event)"
+      class="plugin-selectall-checkbox"
+    >
+      全选
+    </mat-checkbox>
+  </div>
   <mat-selection-list
     [(ngModel)]="selectedPlugin"
     name="selectedPlugin"

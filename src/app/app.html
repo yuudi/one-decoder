@@ -16,9 +16,11 @@
         />
       </button>
     }
-    <button mat-icon-button (click)="share()">
-      <mat-icon fontIcon="share" />
-    </button>
+    @if (canShare) {
+      <button mat-icon-button (click)="share()">
+        <mat-icon fontIcon="share" />
+      </button>
+    }
     <a
       mat-icon-button
       href="https://github.com/yuudi/one-revealer"

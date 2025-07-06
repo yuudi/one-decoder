@@ -18,6 +18,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './app.scss',
 })
 export class App {
+  canShare = navigator.share !== undefined;
   isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   installable = signal(false);
   installPWA = () => void 0;

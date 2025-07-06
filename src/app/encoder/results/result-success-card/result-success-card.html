@@ -7,17 +7,21 @@
     <p class="result-content">{{ result().encoded }}</p>
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions class="result-actions">
     <button
       matButton="tonal"
       [cdkCopyToClipboard]="result().encoded"
       (click)="showCopied()"
     >
-      @if (copied()) {
-        <span>已复制</span>
-      } @else {
-        <span>复制</span>
-      }
+      <mat-icon [fontIcon]="copied() ? 'check_circle' : 'content_copy'" />
+      {{ copied() ? "已复制" : "复制" }}
     </button>
+
+    @if (canShare) {
+      <button matButton="tonal" (click)="share(result().encoded)">
+        <mat-icon fontIcon="share" />
+        发送文本
+      </button>
+    }
   </mat-card-actions>
 </mat-card>

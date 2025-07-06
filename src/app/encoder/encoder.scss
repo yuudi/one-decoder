@@ -9,10 +9,20 @@
   width: 100%;
 }
 
+.plugin-selectall-checkbox-container {
+  > .spacer{
+    flex-grow: 1;
+  }
+  width: 88%;
+  margin: 0 auto;
+  display: flex;
+}
+
 .plugin-selection-list {
   width: 80%;
   margin: 0 auto;
 }
+
 .key-settings-block {
   width: fit-content;
   margin: 0 auto;

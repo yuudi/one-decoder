@@ -1,6 +1,17 @@
-import { Component, effect, inject, model, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  model,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import {
+  type MatCheckboxChange,
+  MatCheckboxModule,
+} from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -16,6 +27,7 @@ import { Results } from './results/results';
     MatFormFieldModule,
     MatListModule,
     MatInputModule,
+    MatCheckboxModule,
     MatButtonModule,
     MatSlideToggleModule,
     Results,
@@ -28,6 +40,12 @@ export class Encoder {
   useKey = model(false);
   key = model('');
   selectedPlugin = model<string[]>([]);
+  selectedAllStatus = computed(() => {
+    const selected = this.selectedPlugin().length;
+    if (selected === 0) return 'none';
+    if (selected === this.plugins.length) return 'checked';
+    return 'indeterminate';
+  });
   output: Promise<EncodeResult>[] | null = null;
   private decodeService = inject(DecodingService);
   plugins = this.decodeService.getPluginsList();
@@ -75,5 +93,9 @@ export class Encoder {
     Promise.allSettled(this.output).then(() => {
       this.encoding.set(false);
     });
+  }
+
+  selectAllCheckboxChange(event: MatCheckboxChange) {
+    this.selectedPlugin.set(event.checked ? this.plugins.map((p) => p.id) : []);
   }
 }

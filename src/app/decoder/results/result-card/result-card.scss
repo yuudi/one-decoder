@@ -21,3 +21,12 @@
 .result-description {
   color: var(--mat-sys-tertiary);
 }
+
+.result-actions > button {
+  margin-right: 1em;
+  @media (max-width: 499px) {
+    > mat-icon {
+      display: none;
+    }
+  }
+}

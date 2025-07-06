@@ -1,5 +1,6 @@
 export const enum DecodeErrorCode {
   Other = 1000,
+  NoResult = 1001,
   DecoderSkipped = 1010,
   InvalidInput = 1100,
   InvalidKey = 1200,

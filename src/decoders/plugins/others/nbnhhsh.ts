@@ -33,8 +33,14 @@ export class NBNHHSHDecoder implements DecoderPlugin {
         code: DecodeErrorCode.NetworkError,
       });
     }
-    const data: { name: string; trans: string[] }[] = await response.json();
+    const data: { name: string; trans?: string[] }[] = await response.json();
     const [{ trans }] = data;
+    if (!trans) {
+      throw new DecodeError('No translation found', {
+        cause: response,
+        code: DecodeErrorCode.NoResult,
+      });
+    }
     return trans.join(', ');
   }
 }

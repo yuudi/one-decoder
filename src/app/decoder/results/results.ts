@@ -25,7 +25,7 @@ export class Results {
   );
   allSettled = computed(() => this.resultsList().every((r) => r !== null));
   hasInvalidKeyError = computed(() =>
-    this.resultsList().find(
+    this.resultsList().some(
       (decodeResult) =>
         decodeResult &&
         !isDecodeSuccessResult(decodeResult) &&
