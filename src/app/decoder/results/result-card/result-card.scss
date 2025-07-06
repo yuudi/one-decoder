@@ -1,5 +1,16 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
 .result-name {
   color: var(--mat-sys-secondary);
+}
+
+.result-score {
+  color: var(--mat-sys-secondary);
+  font-size: 0.8em;
+  align-self: center;
+  white-space: nowrap;
 }
 
 .result-content {

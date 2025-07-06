@@ -8,6 +8,7 @@ interface DecoderPluginInfo {
   readonly link?: string;
   readonly needKey?: boolean;
   readonly encoderHelpMessage?: string;
+  readonly needNetwork?: boolean;
   readonly hide?: boolean;
 }
 

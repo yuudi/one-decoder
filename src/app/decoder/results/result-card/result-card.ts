@@ -12,6 +12,7 @@ import { type DecodeSuccessResult } from '../../../../decoders/types';
 })
 export class ResultCard {
   result = input.required<DecodeSuccessResult>();
+  showScore = input(false);
 
   copied = signal(false);
   showCopied() {

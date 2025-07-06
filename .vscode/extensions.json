@@ -1,8 +1,7 @@
 {
   "recommendations": [
-    "angular.ng-template",
-    "esbenp.prettier-vscode",
-    "streetsidesoftware.code-spell-checker",
-    "dbaeumer.vscode-eslint"
+    "Angular.ng-template",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
   ]
 }

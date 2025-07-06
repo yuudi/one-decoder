@@ -6,10 +6,10 @@ export class HexDecoder implements DecoderPlugin {
 
   checkString(input: string): number {
     if (input.length % 2 === 0 && /^[a-fA-F0-9]+$/.test(input)) {
-      return 99;
+      return Math.min(98, 10 + input.length * 10);
     }
 
-    return 0; // Low score for other cases
+    return 0;
   }
 
   decode(input: string): string {

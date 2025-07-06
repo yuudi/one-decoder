@@ -3,6 +3,8 @@ export const enum DecodeErrorCode {
   DecoderSkipped = 1010,
   InvalidInput = 1100,
   InvalidKey = 1200,
+  NetworkRequired = 1300,
+  NetworkError = 1310,
   Unknown = 1999,
 }
 
@@ -11,6 +13,7 @@ export const enum EncodeErrorCode {
   EncoderIdNotFound = 2001,
   InvalidInput = 2100,
   InvalidKey = 2200,
+  NetworkRequired = 2300,
   Unknown = 2999,
 }
 

@@ -1,8 +1,20 @@
 {
   "name": "Node.js",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "features": {
+    "ghcr.io/devcontainers-extra/features/angular-cli:2": {
+      "version": "20"
+    }
+  },
   "forwardPorts": [4200],
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "npm ci"
+  "postCreateCommand": "npm ci",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Angular.ng-template",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import { DecodeError, DecodeErrorCode } from '../../errors';
 import { type DecoderPlugin } from '../../types';
 
 class MagnetDecoder implements DecoderPlugin {
@@ -6,8 +7,16 @@ class MagnetDecoder implements DecoderPlugin {
   hide = true;
 
   checkString(input: string): number {
-    if (/^(.*btih:)?([0-9a-fA-F]{40}|[a-zA-Z2-7]{32})(&.+)?$/.test(input)) {
-      return 95;
+    const match = input.match(
+      /^(.*btih:)?([0-9a-fA-F]{40}|[a-zA-Z2-7]{32})(&.+)?$/,
+    );
+    if (match) {
+      if (match[1]) {
+        // If the input starts with 'btih:', it is probably a valid magnet link
+        return 99;
+      }
+      // If it is a valid hash, it might be a magnet link
+      return 10;
     }
     return 0;
   }
@@ -61,11 +70,22 @@ class PixivDecoder implements DecoderPlugin {
     if (/^\d{5,10}_p\d{1,2}$/.test(input)) {
       return 100;
     }
+    if (/^pid:?\d{5,10}$/.test(input)) {
+      return 100;
+    }
     return 0;
   }
 
   decode(input: string): string {
-    return 'https://www.pixiv.net/artworks/' + input.split('_')[0];
+    if (/^\d{5,10}_p\d{1,2}$/.test(input)) {
+      return 'https://www.pixiv.net/artworks/' + input.split('_')[0];
+    }
+    if (/^pid:?\d{5,10}$/.test(input)) {
+      return 'https://www.pixiv.net/artworks/' + input.split(':')[1];
+    }
+    throw new DecodeError('Invalid input format', {
+      code: DecodeErrorCode.Unknown,
+    });
   }
 }
 

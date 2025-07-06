@@ -36,6 +36,15 @@ export class Decoder {
   decodeAsync(input: string, key?: string): Promise<DecodeResult>[] {
     const freq = this.getCharFrequency(input);
     return this.getPlugins().map<Promise<DecodeResult>>(async (plugin) => {
+      if (plugin.needNetwork && !navigator.onLine) {
+        return {
+          name: plugin.name,
+          description: plugin.description,
+          score: 0,
+          errorCode: DecodeErrorCode.NetworkRequired,
+          errorMessage: 'Network access is required',
+        };
+      }
       let score;
       try {
         score = await plugin.checkString(input, { key, freq });
@@ -54,31 +63,7 @@ export class Decoder {
         };
       }
 
-      if (score > 0) {
-        let decoded;
-        try {
-          decoded = await plugin.decode(input, { key });
-        } catch (error) {
-          console.error(`Error decoding with plugin ${plugin.name}:`, error);
-          return {
-            name: plugin.name,
-            description: plugin.description,
-            score,
-            errorCode:
-              error instanceof DecodeError
-                ? error.code
-                : DecodeErrorCode.Unknown,
-            errorMessage:
-              error instanceof Error ? error.message : String(error),
-          };
-        }
-        return {
-          name: plugin.name,
-          description: plugin.description,
-          score,
-          decoded,
-        };
-      } else {
+      if (score <= 0) {
         return {
           name: plugin.name,
           description: plugin.description,
@@ -87,6 +72,27 @@ export class Decoder {
           errorMessage: 'scores 0, skipped',
         };
       }
+
+      let decoded;
+      try {
+        decoded = await plugin.decode(input, { key });
+      } catch (error) {
+        console.error(`Error decoding with plugin ${plugin.name}:`, error);
+        return {
+          name: plugin.name,
+          description: plugin.description,
+          score,
+          errorCode:
+            error instanceof DecodeError ? error.code : DecodeErrorCode.Unknown,
+          errorMessage: error instanceof Error ? error.message : String(error),
+        };
+      }
+      return {
+        name: plugin.name,
+        description: plugin.description,
+        score,
+        decoded,
+      };
     });
   }
 
@@ -136,6 +142,14 @@ export class Decoder {
         description: plugin?.description,
         errorCode: EncodeErrorCode.EncoderIdNotFound,
         errorMessage: 'Encoder not available',
+      };
+    }
+    if (plugin.needNetwork && !navigator.onLine) {
+      return {
+        name: plugin.name,
+        description: plugin.description,
+        errorCode: EncodeErrorCode.NetworkRequired,
+        errorMessage: 'Network access is required',
       };
     }
     try {

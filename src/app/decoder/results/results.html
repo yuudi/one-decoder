@@ -24,7 +24,11 @@
     }
   }
   @for (result of resultDisplayList(); track $index) {
-    <app-result-card class="result-card" [result]="result"></app-result-card>
+    <app-result-card
+      class="result-card"
+      [result]="result"
+      [showScore]="resultDisplayList().length > 1 || result.score < 80"
+    ></app-result-card>
   }
 
   @if (!allSettled()) {

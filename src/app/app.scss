@@ -8,7 +8,8 @@
 
 @media (max-width: 499px) {
   .title-row {
-    display: block;
+    display: flex;
+    justify-content: center;
   }
   .title-inline {
     display: none;

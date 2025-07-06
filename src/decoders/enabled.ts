@@ -12,6 +12,8 @@ import { CherugoDecoder } from './plugins/cherugo';
 import { CoreValueDecoder } from './plugins/core-value';
 import { BVDecoder } from './plugins/others/bilibili';
 import { MysteryCodeDecoders } from './plugins/others/mystery-codes';
+import { NBNHHSHDecoder } from './plugins/others/nbnhhsh';
+import { YoutubeDecoder } from './plugins/others/youtube';
 import { WhispererDecoder } from './plugins/whisperer';
 import { ZeroWidthDecoder } from './plugins/zero-width';
 
@@ -26,6 +28,7 @@ export function getPluginList(): DecoderPluginConstructor[] {
     EscapeDecoder,
     MorseDecoder,
     BVDecoder,
+    YoutubeDecoder,
     BuddhaDecoder,
     BeastDecoder,
     BeastNoEmbedDecoder,
@@ -34,6 +37,7 @@ export function getPluginList(): DecoderPluginConstructor[] {
     CherugoDecoder,
     AbracadabraDecoder,
     WhispererDecoder,
+    NBNHHSHDecoder,
     ...MysteryCodeDecoders,
   ];
 }

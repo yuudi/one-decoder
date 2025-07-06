@@ -6,13 +6,13 @@ export class Base64Decoder implements DecoderPlugin {
 
   checkString(input: string): number {
     if (/^[a-zA-Z0-9./=\n]+$/.test(input)) {
-      return 98;
+      return Math.min(98, 20 + input.length * 5);
     }
     if (/^[a-zA-Z0-9-_=\n]+$/.test(input)) {
-      return 98;
+      return Math.min(98, 20 + input.length * 5);
     }
 
-    return 0; // Low score for other cases
+    return 0;
   }
 
   decode(input: string): string {

@@ -9,6 +9,13 @@
     <span class="spacer"></span>
     <span class="title-inline">统一解码</span>
     <span class="spacer"></span>
+    @if (installable()) {
+      <button mat-icon-button (click)="installPWA()">
+        <mat-icon
+          [fontIcon]="isMobileDevice ? 'install_mobile' : 'install_desktop'"
+        />
+      </button>
+    }
     <button mat-icon-button (click)="share()">
       <mat-icon fontIcon="share" />
     </button>

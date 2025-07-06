@@ -16,7 +16,7 @@ export class BeastDecoder implements DecoderPlugin {
       Object.keys(data.freq).length === 4 &&
       allDifferent(Object.keys(data.freq))
     ) {
-      return 80;
+      return Math.min(80, 20 + input.length * 2);
     }
     return 0;
   }
