@@ -1,4 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+html {
+  color-scheme: light dark;
+  @include mat.theme(
+    (
+      color: mat.$azure-palette,
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
 
 html,
 body {
