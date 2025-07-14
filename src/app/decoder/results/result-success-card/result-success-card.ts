@@ -8,7 +8,7 @@ import { QRcode } from '../../../../common/qrcode/qrcode';
 import { type DecodeSuccessResult } from '../../../../decoders/types';
 
 @Component({
-  selector: 'app-result-card',
+  selector: 'app-result-success-card',
   imports: [
     ClipboardModule,
     MatCardModule,
@@ -17,10 +17,10 @@ import { type DecodeSuccessResult } from '../../../../decoders/types';
     ExternalLink,
     QRcode,
   ],
-  templateUrl: './result-card.html',
-  styleUrl: './result-card.scss',
+  templateUrl: './result-success-card.html',
+  styleUrl: './result-success-card.scss',
 })
-export class ResultCard {
+export class ResultSuccessCard {
   result = input.required<DecodeSuccessResult>();
   showScore = input(false);
   canShare = navigator.share !== undefined;

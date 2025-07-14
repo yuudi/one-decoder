@@ -18,8 +18,18 @@ export const enum EncodeErrorCode {
   Unknown = 2999,
 }
 
-export class DecodeError extends Error {
-  public readonly code: DecodeErrorCode;
+export class OneRevealerError extends Error {
+  public readonly code?: number;
+  override toString(): string {
+    const inherited = super.toString();
+    return this.code !== undefined
+      ? `(code: ${this.code}) ${inherited}`
+      : inherited;
+  }
+}
+
+export class DecodeError extends OneRevealerError {
+  public override readonly code: DecodeErrorCode;
   constructor(
     message?: string,
     options?: ErrorOptions & { code?: DecodeErrorCode },
@@ -29,8 +39,8 @@ export class DecodeError extends Error {
   }
 }
 
-export class EncodeError extends Error {
-  public readonly code: EncodeErrorCode;
+export class EncodeError extends OneRevealerError {
+  public override readonly code: EncodeErrorCode;
   constructor(
     message?: string,
     options?: ErrorOptions & { code?: EncodeErrorCode },

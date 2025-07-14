@@ -1,17 +1,17 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExternalLink } from './external-link';
+import { ResultSuccessCard } from './result-success-card';
 
-describe('ExternalLink', () => {
-  let component: ExternalLink;
-  let fixture: ComponentFixture<ExternalLink>;
+describe('ResultCard', () => {
+  let component: ResultSuccessCard;
+  let fixture: ComponentFixture<ResultSuccessCard>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExternalLink],
+      imports: [ResultSuccessCard],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ExternalLink);
+    fixture = TestBed.createComponent(ResultSuccessCard);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

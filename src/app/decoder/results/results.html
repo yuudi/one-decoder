@@ -30,16 +30,46 @@
     }
   }
   @for (result of resultDisplayList(); track $index) {
-    <app-result-card
-      class="result-card"
-      [result]="result"
-      [showScore]="resultDisplayList().length > 1 || result.score < 80"
-    ></app-result-card>
+    @if (isResultSuccess(result)) {
+      <app-result-success-card
+        class="result-card"
+        [result]="result"
+        [showScore]="resultDisplayList().length > 1 || result.score < 80"
+      ></app-result-success-card>
+    } @else {
+      <app-result-error-card
+        class="result-card"
+        [result]="result"
+      ></app-result-error-card>
+    }
   }
 
   @if (!allSettled()) {
     <div class="loading">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  }
+
+  @if (!showFailedResults()) {
+    <div class="footer-button-container">
+      <button
+        matButton
+        (click)="showFailedResults.set(true)"
+        class="footer-button__show-failed"
+      >
+        显示失败结果
+      </button>
+    </div>
+  }
+  @if (showFailedResults() && !showFailedHiddenResults()) {
+    <div class="footer-button-container">
+      <button
+        matButton
+        (click)="showFailedHiddenResults.set(true)"
+        class="footer-button__show-hidden"
+      >
+        显示隐藏的失败结果
+      </button>
     </div>
   }
 </div>

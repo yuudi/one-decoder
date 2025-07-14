@@ -1,9 +1,7 @@
 <div>
   @for (result of resultsList(); track $index) {
     @if (result === null) {
-      <div class="loading">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </div>
+      <!-- nothing -->
     } @else if (isResultSuccess(result)) {
       <app-result-success-card
         class="result-card"
@@ -15,5 +13,11 @@
         [result]="result"
       ></app-result-error-card>
     }
+  }
+
+  @if (!allSettled()) {
+    <div class="loading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
   }
 </div>

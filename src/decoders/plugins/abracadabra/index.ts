@@ -1,9 +1,11 @@
+import { version } from 'abracadabra-cn/package.json';
 import { type DecoderPlugin } from '../../types';
 
 export class AbracadabraDecoder implements DecoderPlugin {
   id = 'abracadabra';
   name = '魔曰';
   link = 'https://abra.halu.ca/';
+  description = `常有不兼容更新，如解码失败请前往官网(当前版本：${version})`;
   needKey = true;
   encoderHelpMessage = '完整选项请前往官网';
 

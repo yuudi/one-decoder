@@ -1,17 +1,17 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultCard } from './result-card';
+import { ResultErrorCard } from './result-error-card';
 
-describe('ResultCard', () => {
-  let component: ResultCard;
-  let fixture: ComponentFixture<ResultCard>;
+describe('ResultErrorCard', () => {
+  let component: ResultErrorCard;
+  let fixture: ComponentFixture<ResultErrorCard>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResultCard],
+      imports: [ResultErrorCard],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ResultCard);
+    fixture = TestBed.createComponent(ResultErrorCard);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

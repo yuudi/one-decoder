@@ -1,3 +1,16 @@
 .result-card {
   margin: 1em;
 }
+
+.footer-button-container {
+  display: flex;
+  justify-content: center;
+  > .footer-button__show-failed {
+    color: var(
+      --mat-sys-surface-dim
+    ); // It is intentionally dimmed to make it hard to see
+  }
+  > .footer-button__show-hidden {
+    color: var(--mat-sys-background); // even harder to see
+  }
+}

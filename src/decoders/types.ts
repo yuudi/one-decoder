@@ -1,17 +1,17 @@
 import { type DecodeErrorCode, type EncodeErrorCode } from './errors';
 
 type ValueOrPromise<T> = T | Promise<T>;
-export interface DecoderPluginInfo {
-  readonly id: string;
-  readonly name: string;
-  readonly description?: string;
-  readonly author?: string;
-  readonly link?: string;
-  readonly needKey?: boolean;
-  readonly encoderHelpMessage?: string;
-  readonly needNetwork?: boolean;
-  readonly hide?: boolean;
-}
+export type DecoderPluginInfo = Readonly<{
+  id: string;
+  name: string;
+  description?: string;
+  author?: string;
+  link?: string;
+  needKey?: boolean;
+  encoderHelpMessage?: string;
+  needNetwork?: boolean;
+  hide?: boolean;
+}>;
 
 export interface DecoderPlugin extends DecoderPluginInfo {
   checkString(
@@ -31,7 +31,7 @@ export interface DecodeSuccessResult extends DecoderPluginInfo {
   score: number;
   decoded: string;
 }
-interface DecodeFailureResult extends DecoderPluginInfo {
+export interface DecodeFailureResult extends DecoderPluginInfo {
   score: number;
   errorCode: DecodeErrorCode;
   errorMessage: string;

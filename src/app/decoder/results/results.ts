@@ -1,5 +1,6 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { forkJoin, from, startWith, switchMap } from 'rxjs';
 import { DecodeErrorCode } from '../../../decoders/errors';
@@ -7,17 +8,25 @@ import {
   isDecodeSuccessResult,
   type DecodeResult,
 } from '../../../decoders/types';
-import { ResultCard } from './result-card/result-card';
+import { ResultErrorCard } from './result-error-card/result-error-card';
+import { ResultSuccessCard } from './result-success-card/result-success-card';
 
 @Component({
   selector: 'app-results',
-  imports: [ResultCard, MatProgressBarModule],
+  imports: [
+    ResultSuccessCard,
+    ResultErrorCard,
+    MatButtonModule,
+    MatProgressBarModule,
+  ],
   templateUrl: './results.html',
   styleUrl: './results.scss',
 })
 export class Results {
   results = input.required<Promise<DecodeResult>[]>();
   hasKey = input(false);
+  showFailedResults = signal(false);
+  showFailedHiddenResults = signal(false);
   resultsList = toSignal(
     toObservable(this.results).pipe(
       switchMap((resultPromises) =>
@@ -30,11 +39,19 @@ export class Results {
     ),
     { initialValue: [] },
   );
-  resultDisplayList = computed(() =>
-    this.resultsList()
-      .filter((r) => r !== null && isDecodeSuccessResult(r))
-      .toSorted((a, b) => b.score - a.score),
-  );
+  resultDisplayList = computed(() => {
+    const displayList = this.resultsList();
+    let filteredList = displayList.filter((r) => r !== null);
+    if (!this.showFailedResults()) {
+      filteredList = filteredList.filter((r) => isDecodeSuccessResult(r));
+    }
+    if (!this.showFailedHiddenResults()) {
+      filteredList = filteredList.filter(
+        (r) => isDecodeSuccessResult(r) || !r.hide,
+      );
+    }
+    return filteredList.toSorted((a, b) => b.score - a.score);
+  });
   allSettled = computed(() => this.resultsList().every((r) => r !== null));
   hasInvalidKeyError = computed(() =>
     this.resultsList().some(
@@ -44,4 +61,8 @@ export class Results {
         decodeResult.errorCode === DecodeErrorCode.InvalidKey,
     ),
   );
+
+  isResultSuccess(result: DecodeResult) {
+    return isDecodeSuccessResult(result);
+  }
 }

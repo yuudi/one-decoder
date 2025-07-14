@@ -1,0 +1,9 @@
+.result-name {
+  color: var(--mat-sys-secondary);
+}
+
+.result-error {
+  color: var(--mat-sys-error);
+  display: flex;
+  align-items: center;
+}

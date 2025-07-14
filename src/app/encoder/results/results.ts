@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { forkJoin, from, startWith, switchMap } from 'rxjs';
@@ -29,6 +29,7 @@ export class Results {
     ),
     { initialValue: [] },
   );
+  allSettled = computed(() => this.resultsList().every((r) => r !== null));
 
   isResultSuccess(result: EncodeResult) {
     return isEncodeSuccessResult(result);

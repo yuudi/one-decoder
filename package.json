@@ -1,10 +1,10 @@
 {
   "name": "one-revealer",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "scripts": {
     "build": "ng build",
-    "lint": "ng lint",
+    "lint": "ng lint --fix && prettier . --write",
     "ng": "ng",
     "start": "ng serve ${REMOTE_CONTAINERS:+--host 0.0.0.0}",
     "watch": "ng build --watch --configuration development"
@@ -24,15 +24,15 @@
     ]
   },
   "dependencies": {
-    "@angular/cdk": "^20.0.4",
-    "@angular/common": "^20.0.5",
-    "@angular/compiler": "^20.0.5",
-    "@angular/core": "^20.0.5",
-    "@angular/forms": "^20.0.5",
-    "@angular/material": "^20.0.4",
-    "@angular/platform-browser": "^20.0.5",
-    "@angular/router": "^20.0.5",
-    "@angular/service-worker": "^20.0.5",
+    "@angular/cdk": "^20.1.0",
+    "@angular/common": "^20.1.0",
+    "@angular/compiler": "^20.1.0",
+    "@angular/core": "^20.1.0",
+    "@angular/forms": "^20.1.0",
+    "@angular/material": "^20.1.0",
+    "@angular/platform-browser": "^20.1.0",
+    "@angular/router": "^20.1.0",
+    "@angular/service-worker": "^20.1.0",
     "abracadabra-cn": "^3.1.10",
     "crypto-js": "^4.2.0",
     "hidden-watermark-wasm": "git+https://github.com/yuudi/one-revealer.git#hidden-watermark-wasm",
@@ -43,14 +43,14 @@
     "zero-width-lib": "^1.1.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.0.4",
-    "@angular/cli": "^20.0.4",
-    "@angular/compiler-cli": "^20.0.5",
+    "@angular/build": "^20.1.0",
+    "@angular/cli": "^20.1.0",
+    "@angular/compiler-cli": "^20.1.0",
     "@types/crypto-js": "^4.2.2",
     "@types/jasmine": "~5.1.8",
     "@types/qrcode": "^1.5.5",
     "angular-eslint": "20.1.1",
-    "eslint": "^9.30.0",
+    "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
     "jasmine-core": "~5.8.0",
@@ -62,8 +62,8 @@
     "npm-check-updates": "^18.0.1",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-packagejson": "^2.5.17",
+    "prettier-plugin-packagejson": "^2.5.18",
     "typescript": "~5.8.3",
-    "typescript-eslint": "8.35.0"
+    "typescript-eslint": "8.36.0"
   }
 }
