@@ -4,6 +4,14 @@ export class NewDecoder implements DecoderPlugin {
   id = 'new-decoder'; // Unique identifier, contains only lowercase letters, numbers, and hyphens
   name = 'New Decoder Plugin'; // Display name
 
+  // // Optional properties
+  // description = 'Template for new plugins'; // Description
+  // link = 'https://example.com'; // Link to documentation or homepage
+  // needKey = false; // Whether the plugin requires a key
+  // encoderHelpMessage = ''; // Shown in encoding page
+  // needNetwork = false; // Whether the plugin need external API calls
+  // hide = false; // Whether to hide this plugin in about page and encoding page
+
   // Analyze the input string and return a confidence score (0-100)
   // score is just a very subjective value, you can implement your own logic
   checkString(input: string): number {
