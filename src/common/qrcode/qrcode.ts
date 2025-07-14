@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 
 async function generateQRCode(rawString: string) {
-  const { toDataURL } = await import('qrcode'); // lazy loading
-  return toDataURL(rawString, { errorCorrectionLevel: 'L' });
+  const { default: qrcode } = await import('qrcode'); // lazy loading
+  return qrcode.toDataURL(rawString, { errorCorrectionLevel: 'L' });
 }
 
 @Directive({
