@@ -1,5 +1,5 @@
 [package]
-name = "wasm_text_watermark"
+name = "hidden-watermark-wasm"
 version = "0.1.0"
 edition = "2021"
 
@@ -10,3 +10,5 @@ crate-type = ["cdylib"]
 wasm-bindgen = "0.2"
 hidden_watermark = "0.1.8"
 
+[profile.release]
+opt-level = "s"

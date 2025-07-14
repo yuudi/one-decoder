@@ -1,0 +1,17 @@
+{
+  "name": "hidden-watermark-wasm",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "hidden_watermark_wasm_bg.wasm",
+    "hidden_watermark_wasm.js",
+    "hidden_watermark_wasm_bg.js",
+    "hidden_watermark_wasm.d.ts"
+  ],
+  "main": "hidden_watermark_wasm.js",
+  "types": "hidden_watermark_wasm.d.ts",
+  "sideEffects": [
+    "./hidden_watermark_wasm.js",
+    "./snippets/*"
+  ]
+}
