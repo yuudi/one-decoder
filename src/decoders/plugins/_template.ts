@@ -6,6 +6,7 @@ export class NewDecoder implements DecoderPlugin {
 
   // // Optional properties
   // description = 'Template for new plugins'; // Description
+  // author = 'name'; // Author name
   // link = 'https://example.com'; // Link to documentation or homepage
   // needKey = false; // Whether the plugin requires a key
   // encoderHelpMessage = ''; // Shown in encoding page

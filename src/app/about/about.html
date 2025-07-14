@@ -8,11 +8,9 @@
       本站是一个开源项目，收集网络上常见的伪装类型解码器，并以纯前端实现离线解码
     </p>
     <p>
-      如果需要离线使用，请将本页面以PWA方式安装（<a
+      如果需要离线使用，请将本页面以PWA方式安装（<app-external-link
         href="https://web.dev/learn/pwa/installation?hl=zh-cn#installation_criteria"
-        target="_blank"
-        rel="noopener noreferrer"
-        >PWA 安装方法</a
+        >PWA 安装方法</app-external-link
       >）。或者前往GitHub下载源码进行编译
     </p>
     <p>目前收录的编码类型包括：</p>
@@ -20,9 +18,9 @@
       @for (plugin of pluginList; track plugin.id) {
         <li>
           @if (plugin.link) {
-            <a [href]="plugin.link" target="_blank" rel="noopener noreferrer">
-              {{ plugin.name }}
-            </a>
+            <app-external-link href="{{ plugin.link }}">{{
+              plugin.name
+            }}</app-external-link>
           } @else {
             {{ plugin.name }}
           }
@@ -31,15 +29,13 @@
     </ul>
 
     代码问题请提交
-    <a
+    <app-external-link
       href="https://github.com/yuudi/one-revealer/issues"
-      target="_blank"
       rel="noopener noreferrer"
-      >Issue</a
-    >，非代码问题也欢迎参与<a
+      >Issue</app-external-link
+    >，非代码问题也欢迎参与<app-external-link
       href="https://github.com/yuudi/one-revealer/discussions"
-      target="_blank"
-      >自由讨论</a
+      >自由讨论</app-external-link
     >
   </mat-card-content>
 </mat-card>

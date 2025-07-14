@@ -2,9 +2,16 @@
   <mat-card-header class="result-header">
     <mat-card-title-group>
       <mat-card-title class="result-name"> {{ result().name }} </mat-card-title>
-      @if (result().description; as description) {
-        <mat-card-subtitle class="result-description">
-          {{ description }}
+      @if (result().description || result().link) {
+        <mat-card-subtitle>
+          @if (result().description) {
+            <span class="result-description"> {{ result().description }} </span>
+          }
+          @if (result().link) {
+            <app-external-link href="{{ result().link }}" class="result-link"
+              >源网站</app-external-link
+            >
+          }
         </mat-card-subtitle>
       }
     </mat-card-title-group>

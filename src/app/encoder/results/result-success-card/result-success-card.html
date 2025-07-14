@@ -1,6 +1,15 @@
 <mat-card>
   <mat-card-header class="result-header">
-    <mat-card-title class="result-name"> {{ result().name }} </mat-card-title>
+    <mat-card-title-group>
+      <mat-card-title class="result-name"> {{ result().name }} </mat-card-title>
+      @if (result().link) {
+        <mat-card-subtitle>
+          <app-external-link href="{{ result().link }}" class="result-link"
+            >源网站</app-external-link
+          >
+        </mat-card-subtitle>
+      }
+    </mat-card-title-group>
   </mat-card-header>
 
   <mat-card-content>

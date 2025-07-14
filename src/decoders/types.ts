@@ -1,10 +1,11 @@
 import { type DecodeErrorCode, type EncodeErrorCode } from './errors';
 
 type ValueOrPromise<T> = T | Promise<T>;
-interface DecoderPluginInfo {
+export interface DecoderPluginInfo {
   readonly id: string;
   readonly name: string;
   readonly description?: string;
+  readonly author?: string;
   readonly link?: string;
   readonly needKey?: boolean;
   readonly encoderHelpMessage?: string;
@@ -26,15 +27,11 @@ export interface DecoderPlugin extends DecoderPluginInfo {
   encode?(input: string, key?: string): ValueOrPromise<string>;
 }
 
-export interface DecodeSuccessResult {
-  name: string;
-  description?: string;
+export interface DecodeSuccessResult extends DecoderPluginInfo {
   score: number;
   decoded: string;
 }
-interface DecodeFailureResult {
-  name: string;
-  description?: string;
+interface DecodeFailureResult extends DecoderPluginInfo {
   score: number;
   errorCode: DecodeErrorCode;
   errorMessage: string;
@@ -47,14 +44,10 @@ export function isDecodeSuccessResult(
   return 'decoded' in result;
 }
 
-export interface EncodeSuccessResult {
-  name: string;
-  description?: string;
+export interface EncodeSuccessResult extends DecoderPluginInfo {
   encoded: string;
 }
-export interface EncodeFailureResult {
-  name: string;
-  description?: string;
+export interface EncodeFailureResult extends DecoderPluginInfo {
   errorCode: EncodeErrorCode;
   errorMessage: string;
 }

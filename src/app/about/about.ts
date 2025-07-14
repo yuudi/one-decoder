@@ -1,10 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { DecodingService } from '../../common/decodingService';
+import { ExternalLink } from '../../common/external-link/external-link/external-link';
 
 @Component({
   selector: 'app-about',
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatIconModule, ExternalLink],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

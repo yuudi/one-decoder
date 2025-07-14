@@ -3,11 +3,18 @@ import { Component, input, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { ExternalLink } from '../../../../common/external-link/external-link/external-link';
 import { type EncodeSuccessResult } from '../../../../decoders/types';
 
 @Component({
   selector: 'app-result-success-card',
-  imports: [ClipboardModule, MatCardModule, MatButtonModule, MatIconModule],
+  imports: [
+    ClipboardModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    ExternalLink,
+  ],
   templateUrl: './result-success-card.html',
   styleUrl: './result-success-card.scss',
 })
