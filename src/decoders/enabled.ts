@@ -10,6 +10,7 @@ import { BeastDecoder, BeastNoEmbedDecoder } from './plugins/beast';
 import { BuddhaDecoder } from './plugins/buddha';
 import { CherugoDecoder } from './plugins/cherugo';
 import { CoreValueDecoder } from './plugins/core-value';
+import { HiddenWatermarkDecoder } from './plugins/hidden-watermark';
 import { HouDecoder } from './plugins/hou';
 import { BVDecoder } from './plugins/others/bilibili';
 import { MysteryCodeDecoders } from './plugins/others/mystery-codes';
@@ -35,6 +36,7 @@ export function getPluginList(): DecoderPluginConstructor[] {
     BeastNoEmbedDecoder,
     CoreValueDecoder,
     ZeroWidthDecoder,
+    HiddenWatermarkDecoder,
     CherugoDecoder,
     AbracadabraDecoder,
     WhispererDecoder,
