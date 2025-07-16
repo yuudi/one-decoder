@@ -1,4 +1,4 @@
-import { type DecoderPlugin } from '../../types';
+import { type DecoderPlugin } from '../../decoders/types';
 
 export class YoutubeDecoder implements DecoderPlugin {
   id = 'youtube';

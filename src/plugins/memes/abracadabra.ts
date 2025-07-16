@@ -1,5 +1,5 @@
 import { version } from 'abracadabra-cn/package.json';
-import { type DecoderPlugin } from '../types';
+import { type DecoderPlugin } from '../../decoders/types';
 
 export class AbracadabraDecoder implements DecoderPlugin {
   id = 'abracadabra';

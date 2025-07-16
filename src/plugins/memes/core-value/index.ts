@@ -1,4 +1,4 @@
-import { type DecoderPlugin } from '../../types';
+import { type DecoderPlugin } from '../../../decoders/types';
 import CoreValue from './lib-core-value';
 
 export class CoreValueDecoder implements DecoderPlugin {

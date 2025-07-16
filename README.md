@@ -24,7 +24,7 @@ Run `npm start` and open <localhost:4200> to debug
 
 ### Plugins
 
-Use [template file](src/decoders/plugins/_template.ts), create a new class and put it in [enabled list](src/decoders/enabled.ts)
+Use [template file](./src/plugins/_template.ts), create a new class and put it in [enabled list](./src/plugins/enabled.ts)
 
 Run `npm start` and open <localhost:4200> to debug
 

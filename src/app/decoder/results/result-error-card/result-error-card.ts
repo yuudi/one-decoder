@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { ExternalLink } from '../../../../common/external-link/external-link/external-link';
 import { type DecodeFailureResult } from '../../../../decoders/types';
+import { ExternalLink } from '../../../shared/external-link/external-link/external-link';
 
 @Component({
   selector: 'app-result-error-card',

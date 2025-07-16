@@ -16,8 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { DecodingService } from '../../common/decodingService';
 import { type EncodeResult } from '../../decoders/types';
+import { DecodingService } from '../shared/decodingService';
 import { Results } from './results/results';
 
 @Component({

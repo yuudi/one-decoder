@@ -1,5 +1,5 @@
-import { DecodeError, DecodeErrorCode } from '../errors';
-import { type DecoderPlugin } from '../types';
+import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
+import { type DecoderPlugin } from '../../decoders/types';
 
 const wj = '\u2060'; // WORD JOINER
 const zwnbsp = '\uFEFF'; // ZERO WIDTH NO-BREAK SPACE

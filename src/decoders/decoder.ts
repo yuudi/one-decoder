@@ -1,4 +1,4 @@
-import { getPluginList } from './enabled';
+import { getPluginList } from '../plugins/enabled';
 import {
   DecodeError,
   DecodeErrorCode,

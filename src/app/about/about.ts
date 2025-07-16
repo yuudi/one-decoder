@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { DecodingService } from '../../common/decodingService';
-import { ExternalLink } from '../../common/external-link/external-link/external-link';
+import { DecodingService } from '../shared/decodingService';
+import { ExternalLink } from '../shared/external-link/external-link/external-link';
 
 @Component({
   selector: 'app-about',

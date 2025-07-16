@@ -1,4 +1,4 @@
-import { type DecoderPlugin } from '../types';
+import { type DecoderPlugin } from '../decoders/types';
 
 export class NewDecoder implements DecoderPlugin {
   id = 'new-decoder'; // Unique identifier, contains only lowercase letters, numbers, and hyphens

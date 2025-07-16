@@ -1,23 +1,22 @@
-import type { DecoderPlugin } from './types';
-
+import type { DecoderPlugin } from '../decoders/types';
 import { Base64Decoder } from './basic/base64';
 import { EscapeDecoder } from './basic/escape';
 import { HexDecoder } from './basic/hex';
 import { MorseDecoder } from './basic/morse';
 import { UrlDecoder } from './basic/url';
-import { AbracadabraDecoder } from './plugins';
-import { BeastDecoder, BeastNoEmbedDecoder } from './plugins/beast';
-import { BuddhaDecoder } from './plugins/buddha';
-import { CherugoDecoder } from './plugins/cherugo';
-import { CoreValueDecoder } from './plugins/core-value';
-import { HiddenWatermarkDecoder } from './plugins/hidden-watermark';
-import { HouDecoder } from './plugins/hou';
-import { BVDecoder } from './plugins/others/bilibili';
-import { MysteryCodeDecoders } from './plugins/others/mystery-codes';
-import { NBNHHSHDecoder } from './plugins/others/nbnhhsh';
-import { YoutubeDecoder } from './plugins/others/youtube';
-import { WhispererDecoder } from './plugins/whisperer';
-import { ZeroWidthDecoder } from './plugins/zero-width';
+import { AbracadabraDecoder } from './memes/abracadabra';
+import { BeastDecoder, BeastNoEmbedDecoder } from './memes/beast';
+import { BuddhaDecoder } from './memes/buddha';
+import { CherugoDecoder } from './memes/cherugo';
+import { CoreValueDecoder } from './memes/core-value';
+import { HiddenWatermarkDecoder } from './memes/hidden-watermark';
+import { HouDecoder } from './memes/hou';
+import { WhispererDecoder } from './memes/whisperer';
+import { ZeroWidthDecoder } from './memes/zero-width';
+import { BVDecoder } from './others/bilibili';
+import { MysteryCodeDecoders } from './others/mystery-codes';
+import { NBNHHSHDecoder } from './others/nbnhhsh';
+import { YoutubeDecoder } from './others/youtube';
 
 type DecoderPluginConstructor = new () => DecoderPlugin;
 

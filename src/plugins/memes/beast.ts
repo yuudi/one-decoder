@@ -1,5 +1,5 @@
-import { EncodeError, EncodeErrorCode } from '../errors';
-import { type DecoderPlugin } from '../types';
+import { EncodeError, EncodeErrorCode } from '../../decoders/errors';
+import { type DecoderPlugin } from '../../decoders/types';
 
 export class BeastDecoder implements DecoderPlugin {
   id = 'beast';
