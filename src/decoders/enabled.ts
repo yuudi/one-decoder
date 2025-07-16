@@ -5,7 +5,7 @@ import { EscapeDecoder } from './basic/escape';
 import { HexDecoder } from './basic/hex';
 import { MorseDecoder } from './basic/morse';
 import { UrlDecoder } from './basic/url';
-import { AbracadabraDecoder } from './plugins/abracadabra';
+import { AbracadabraDecoder } from './plugins';
 import { BeastDecoder, BeastNoEmbedDecoder } from './plugins/beast';
 import { BuddhaDecoder } from './plugins/buddha';
 import { CherugoDecoder } from './plugins/cherugo';

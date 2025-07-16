@@ -1,6 +1,6 @@
 {
   "name": "one-revealer",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "ng build",
@@ -33,7 +33,7 @@
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
     "@angular/service-worker": "^20.1.0",
-    "abracadabra-cn": "^3.1.10",
+    "abracadabra-cn": "^3.1.11",
     "crypto-js": "^4.2.0",
     "hidden-watermark-wasm": "git+https://github.com/yuudi/one-revealer.git#hidden-watermark-wasm",
     "qrcode": "^1.5.4",
@@ -64,6 +64,6 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-packagejson": "^2.5.18",
     "typescript": "~5.8.3",
-    "typescript-eslint": "8.36.0"
+    "typescript-eslint": "8.37.0"
   }
 }
