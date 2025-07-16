@@ -5,7 +5,7 @@ export class Base64Decoder implements DecoderPlugin {
   name = 'Base64';
 
   checkString(input: string): number {
-    if (/^[a-zA-Z0-9./=\n]+$/.test(input)) {
+    if (/^[a-zA-Z0-9+/=\n]+$/.test(input)) {
       return Math.min(98, 20 + input.length * 5);
     }
     if (/^[a-zA-Z0-9-_=\n]+$/.test(input)) {
