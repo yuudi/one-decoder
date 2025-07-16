@@ -5,7 +5,7 @@ export class HouDecoder implements DecoderPlugin {
   id = 'hou';
   name = '齁语'; // 原名 "母猪文" 不好听
   link = 'https://msbt.seku.su/';
-  hide = true;
+  hide = false;
 
   code: string[];
   codeMap: Record<string, number>;

@@ -3,6 +3,7 @@ import { type DecoderPlugin } from '../types';
 export class HexDecoder implements DecoderPlugin {
   id = 'hex';
   name = '16进制';
+  hide = true;
 
   checkString(input: string): number {
     if (input.length % 2 === 0 && /^[a-fA-F0-9]+$/.test(input)) {
