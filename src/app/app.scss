@@ -15,3 +15,15 @@
     display: none;
   }
 }
+
+// use id to override material default style
+#app-toolbar-top .button-with-icon-text {
+  > .button-icon {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    @media (max-width: 699px) {
+      display: none;
+    }
+  }
+}
