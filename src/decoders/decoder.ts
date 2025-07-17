@@ -14,7 +14,7 @@ import type {
 } from './types';
 
 export class Decoder {
-  private plugins = getPluginList();
+  private plugins = getPluginList() as (new () => DecoderPlugin)[];
   private initializedPlugins: DecoderPlugin[] | undefined = undefined;
 
   initializePlugins(): void {

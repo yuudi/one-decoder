@@ -1,18 +1,19 @@
-import { type DecoderPlugin } from '../decoders/types';
+import { Plugin } from '../decoders/decorators';
 
-export class NewDecoder implements DecoderPlugin {
-  id = 'new-decoder'; // Unique identifier, contains only lowercase letters, numbers, and hyphens
-  name = 'New Decoder Plugin'; // Display name
+@Plugin({
+  id: 'new-decoder', // Unique identifier, contains only lowercase letters, numbers, and hyphens
+  name: 'New Decoder Plugin', // Display name
 
   // // Optional properties
-  // description = 'Template for new plugins'; // Description
-  // author = 'name'; // Author name
-  // link = 'https://example.com'; // Link to documentation or homepage
-  // needKey = false; // Whether the plugin requires a key
-  // encoderHelpMessage = ''; // Shown in encoding page
-  // needNetwork = false; // Whether the plugin need external API calls
-  // hide = false; // Whether to hide this plugin in about page and encoding page
-
+  // description: 'Template for new plugins', // Description
+  // author: 'name', // Author name
+  // link: 'https://example.com', // Link to documentation or homepage
+  // needKey: false, // Whether the plugin requires a key
+  // encoderHelpMessage: '', // Shown in encoding page
+  // needNetwork: false, // Whether the plugin need external API calls
+  // hide: false, // Whether to hide this plugin in about page and encoding page
+})
+export class NewDecoder {
   // Analyze the input string and return a confidence score (0-100)
   // score is just a very subjective value, you can implement your own logic
   checkString(input: string): number {
@@ -30,6 +31,19 @@ export class NewDecoder implements DecoderPlugin {
 
   // // Optionally implement encoding
   // encode(input: string): string {
+  //   return input;
+  // }
+
+  // // All these methods can be async if needed
+  // async checkString(input: string): Promise<number> {
+  //   return 0;
+  // }
+
+  // async decode(input: string): Promise<string> {
+  //   return input;
+  // }
+
+  // async encode(input: string): Promise<string> {
   //   return input;
   // }
 }

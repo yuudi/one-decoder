@@ -1,4 +1,4 @@
-import type { DecoderPlugin } from '../decoders/types';
+import type { DecoderPluginImplement } from '../decoders/types';
 import { Base64Decoder } from './basic/base64';
 import { EscapeDecoder } from './basic/escape';
 import { HexDecoder } from './basic/hex';
@@ -18,7 +18,7 @@ import { MysteryCodeDecoders } from './others/mystery-codes';
 import { NBNHHSHDecoder } from './others/nbnhhsh';
 import { YoutubeDecoder } from './others/youtube';
 
-type DecoderPluginConstructor = new () => DecoderPlugin;
+type DecoderPluginConstructor = new () => DecoderPluginImplement;
 
 export function getPluginList(): DecoderPluginConstructor[] {
   return [

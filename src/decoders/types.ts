@@ -1,6 +1,6 @@
 import { type DecodeErrorCode, type EncodeErrorCode } from './errors';
 
-type ValueOrPromise<T> = T | Promise<T>;
+export type ValueOrPromise<T> = T | Promise<T>;
 export type DecoderPluginInfo = Readonly<{
   id: string;
   name: string;
@@ -13,19 +13,23 @@ export type DecoderPluginInfo = Readonly<{
   hide?: boolean;
 }>;
 
-export interface DecoderPlugin extends DecoderPluginInfo {
+export interface DecoderPluginImplement {
   checkString(
     input: string,
-    data: Readonly<{ key?: string; freq: Record<string, number> }>,
+    data?: Readonly<{ key?: string; freq: Record<string, number> }>,
   ): ValueOrPromise<number>;
 
   decode(
     input: string,
-    data: Readonly<{ key?: string }>,
+    data?: Readonly<{ key?: string }>,
   ): ValueOrPromise<string>;
 
   encode?(input: string, key?: string): ValueOrPromise<string>;
 }
+
+export interface DecoderPlugin
+  extends DecoderPluginInfo,
+    DecoderPluginImplement {}
 
 export interface DecodeSuccessResult extends DecoderPluginInfo {
   score: number;

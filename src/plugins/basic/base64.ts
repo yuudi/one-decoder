@@ -1,9 +1,7 @@
-import { type DecoderPlugin } from '../../decoders/types';
+import { Plugin } from '../../decoders/decorators';
 
-export class Base64Decoder implements DecoderPlugin {
-  id = 'base64';
-  name = 'Base64';
-
+@Plugin({ id: 'base64', name: 'Base64' })
+export class Base64Decoder {
   checkString(input: string): number {
     if (/^[a-zA-Z0-9+/=\n]+$/.test(input)) {
       return Math.min(98, 20 + input.length * 5);
