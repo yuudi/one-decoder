@@ -36,6 +36,7 @@
     "abracadabra-cn": "^3.1.11",
     "bs58": "^6.0.0",
     "crypto-js": "^4.2.0",
+    "entities": "^6.0.1",
     "hi-base32": "^0.5.1",
     "hidden-watermark-wasm": "git+https://github.com/yuudi/one-decoder.git#hidden-watermark-wasm",
     "punycode": "^2.3.1",

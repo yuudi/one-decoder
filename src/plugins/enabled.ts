@@ -4,6 +4,7 @@ import { Base58Decoder } from './basics/base58';
 import { Base64Decoder } from './basics/base64';
 import { EscapeDecoder } from './basics/escape';
 import { HexDecoder } from './basics/hex';
+import { HtmlDecoder } from './basics/html';
 import { MorseDecoder } from './basics/morse';
 import { PunycodeDecoder } from './basics/punycode';
 import { UrlDecoder } from './basics/url';
@@ -32,6 +33,7 @@ export function getPluginList(): DecoderPluginConstructor[] {
     HexDecoder,
     UrlDecoder,
     EscapeDecoder,
+    HtmlDecoder,
     MorseDecoder,
     PunycodeDecoder,
     BVDecoder,

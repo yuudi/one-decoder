@@ -7,8 +7,9 @@ export class HexDecoder {
       return Math.min(98, 10 + input.length * 10);
     }
 
+    // support \xhh format
     if (/^(?:\\x[a-fA-F0-9]{2})+$/.test(input)) {
-      return Math.min(98, 10 + input.length * 10);
+      return 100;
     }
 
     return 0;
