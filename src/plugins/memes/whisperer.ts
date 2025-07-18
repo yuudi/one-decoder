@@ -1,12 +1,13 @@
-import { type DecoderPlugin } from '../../decoders/types';
+import { Plugin } from '../../decoders/decorators';
 
-export class WhispererDecoder implements DecoderPlugin {
-  id = 'whisperer';
-  name = '低语者';
-  link = 'https://github.com/Borber/Whisperer';
-  needKey = false;
-  encoderHelpMessage = '完整选项请前往官网';
-
+@Plugin({
+  id: 'whisperer',
+  name: '低语者',
+  link: 'https://github.com/Borber/Whisperer',
+  needKey: false,
+  encoderHelpMessage: '完整选项请前往官网',
+})
+export class WhispererDecoder {
   checkString(input: string): number {
     if (input.startsWith('低语:') || input.startsWith('低语：')) {
       return 100;

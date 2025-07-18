@@ -1,11 +1,12 @@
+import { Plugin } from '../../decoders/decorators';
 import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
-import { type DecoderPlugin } from '../../decoders/types';
 
-class MagnetDecoder implements DecoderPlugin {
-  id = 'magnet';
-  name = '磁力';
-  hide = true;
-
+@Plugin({
+  id: 'magnet',
+  name: '磁力',
+  hide: true,
+})
+class MagnetDecoder {
   checkString(input: string): number {
     const match = input.match(
       /^(.*btih:)?([0-9a-fA-F]{40}|[a-zA-Z2-7]{32})(&.+)?$/,
@@ -27,11 +28,12 @@ class MagnetDecoder implements DecoderPlugin {
   }
 }
 
-class Fc2Decoder implements DecoderPlugin {
-  id = 'fc2';
-  name = 'FC2';
-  hide = true;
-
+@Plugin({
+  id: 'fc2',
+  name: 'FC2',
+  hide: true,
+})
+class Fc2Decoder {
   checkString(input: string): number {
     if (/^FC2-(PPV-)?\d+$/i.test(input)) {
       return 100;
@@ -44,11 +46,12 @@ class Fc2Decoder implements DecoderPlugin {
   }
 }
 
-class DLsiteDecoder implements DecoderPlugin {
-  id = 'dlsite';
-  name = 'DLSite';
-  hide = true;
-
+@Plugin({
+  id: 'dlsite',
+  name: 'DLSite',
+  hide: true,
+})
+class DLsiteDecoder {
   checkString(input: string): number {
     if (/^RJ\d+$/i.test(input)) {
       return 100;
@@ -61,11 +64,12 @@ class DLsiteDecoder implements DecoderPlugin {
   }
 }
 
-class PixivDecoder implements DecoderPlugin {
-  id = 'pixiv';
-  name = 'Pixiv';
-  hide = true;
-
+@Plugin({
+  id: 'pixiv',
+  name: 'Pixiv',
+  hide: true,
+})
+class PixivDecoder {
   checkString(input: string): number {
     if (/^\d{5,10}_p\d{1,2}$/.test(input)) {
       return 100;
@@ -89,11 +93,12 @@ class PixivDecoder implements DecoderPlugin {
   }
 }
 
-class JMDecoder implements DecoderPlugin {
-  id = '18comic';
-  name = '禁漫天堂';
-  hide = true;
-
+@Plugin({
+  id: '18comic',
+  name: '禁漫天堂',
+  hide: true,
+})
+class JMDecoder {
   checkString(input: string): number {
     if (/^jm\d+$/i.test(input)) {
       return 100;

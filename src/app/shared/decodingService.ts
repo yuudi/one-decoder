@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Decoder } from '../../decoders/decoder';
+import { type DecoderPlugin } from '../../decoders/types';
+import { getPluginList } from '../../plugins/enabled';
+
+function getPlugins() {
+  return getPluginList().map((Plugin) => new Plugin() as DecoderPlugin);
+}
 
 @Injectable({ providedIn: 'root' })
 export class DecodingService {
-  private decoder = new Decoder();
+  private decoder = new Decoder(getPlugins());
 
   getPluginsList() {
     return this.decoder.getPluginsList();

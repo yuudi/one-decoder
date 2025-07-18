@@ -1,5 +1,5 @@
 {
-  "name": "one-revealer",
+  "name": "one-decoder",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -34,12 +34,15 @@
     "@angular/router": "^20.1.0",
     "@angular/service-worker": "^20.1.0",
     "abracadabra-cn": "^3.1.11",
+    "bs58": "^6.0.0",
     "crypto-js": "^4.2.0",
-    "hidden-watermark-wasm": "git+https://github.com/yuudi/one-revealer.git#hidden-watermark-wasm",
+    "hi-base32": "^0.5.1",
+    "hidden-watermark-wasm": "git+https://github.com/yuudi/one-decoder.git#hidden-watermark-wasm",
+    "punycode": "^2.3.1",
     "qrcode": "^1.5.4",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1",
-    "whisperer-wasm": "git+https://github.com/yuudi/one-revealer.git#whisperer-wasm",
+    "whisperer-wasm": "git+https://github.com/yuudi/one-decoder.git#whisperer-wasm",
     "zero-width-lib": "^1.1.0"
   },
   "devDependencies": {
@@ -48,6 +51,7 @@
     "@angular/compiler-cli": "^20.1.0",
     "@types/crypto-js": "^4.2.2",
     "@types/jasmine": "~5.1.8",
+    "@types/punycode": "^2.1.4",
     "@types/qrcode": "^1.5.5",
     "angular-eslint": "20.1.1",
     "eslint": "^9.31.0",

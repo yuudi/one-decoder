@@ -1,10 +1,11 @@
-import { type DecoderPlugin } from '../../decoders/types';
+import { Plugin } from '../../decoders/decorators';
 
-export class YoutubeDecoder implements DecoderPlugin {
-  id = 'youtube';
-  name = 'YouTube';
-  hide = true;
-
+@Plugin({
+  id: 'youtube',
+  name: 'YouTube',
+  hide: true,
+})
+export class YoutubeDecoder {
   checkString(input: string): number {
     const match = input.match(/(v=)?[\w-]{11}(&.+)?$/);
     if (match) {

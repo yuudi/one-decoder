@@ -18,7 +18,7 @@ export const enum EncodeErrorCode {
   Unknown = 2999,
 }
 
-export class OneRevealerError extends Error {
+export class OneDecoderError extends Error {
   public readonly code?: number;
   override toString(): string {
     const inherited = super.toString();
@@ -28,7 +28,7 @@ export class OneRevealerError extends Error {
   }
 }
 
-export class DecodeError extends OneRevealerError {
+export class DecodeError extends OneDecoderError {
   public override readonly code: DecodeErrorCode;
   constructor(
     message?: string,
@@ -39,7 +39,7 @@ export class DecodeError extends OneRevealerError {
   }
 }
 
-export class EncodeError extends OneRevealerError {
+export class EncodeError extends OneDecoderError {
   public override readonly code: EncodeErrorCode;
   constructor(
     message?: string,

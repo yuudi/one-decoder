@@ -5,6 +5,8 @@ export function Plugin<T extends DecoderPluginImplement>(
 ) {
   return function (constructor: new () => T) {
     Object.assign(constructor.prototype, info);
-    return constructor;
+    constructor.prototype.info = function () {
+      return info;
+    };
   };
 }

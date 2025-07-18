@@ -1,8 +1,8 @@
-# OneRevealer
+# OneDecoder
 
-收集网络上常见的伪装类型解码器，并以纯前端实现离线解码
+收集各种解码器，无需选择类型，自动推测内容，纯前端实现解码
 
-<https://yuudi.github.io/one-revealer/>
+<https://one-decoder.yuudi.dev>
 
 ## Build
 

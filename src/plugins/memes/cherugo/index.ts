@@ -1,12 +1,13 @@
-import { type DecoderPlugin } from '../../../decoders/types';
+import { Plugin } from '../../../decoders/decorators';
 import type Encoder from './lib/gbk';
 
-export class CherugoDecoder implements DecoderPlugin {
-  id = 'cherugo';
-  name = '切噜语';
-  link = 'https://pcrbot.github.io/cherugo.js/';
-  needKey = false;
-
+@Plugin({
+  id: 'cherugo',
+  name: '切噜语',
+  link: 'https://pcrbot.github.io/cherugo.js/',
+  needKey: false,
+})
+export class CherugoDecoder {
   private encoder: Encoder | undefined;
   private async getEncoder() {
     if (!this.encoder) {

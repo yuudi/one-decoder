@@ -1,11 +1,12 @@
+import { Plugin } from '../../decoders/decorators';
 import { EncodeError, EncodeErrorCode } from '../../decoders/errors';
-import { type DecoderPlugin } from '../../decoders/types';
 
-export class MorseDecoder implements DecoderPlugin {
-  id = 'morse';
-  name = '摩斯电码';
-  encoderHelpMessage = '只支持字母和数字，字母不区分大小写';
-
+@Plugin({
+  id: 'morse',
+  name: '摩斯电码',
+  encoderHelpMessage: '只支持字母和数字，字母不区分大小写',
+})
+export class MorseDecoder {
   checkString(input: string): number {
     if (/^[.-/| ]+$/.test(input)) {
       // possible dividers: "|" "/" ""

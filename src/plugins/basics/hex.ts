@@ -1,12 +1,13 @@
-import { type DecoderPlugin } from '../../decoders/types';
+import { Plugin } from '../../decoders/decorators';
 
-export class HexDecoder implements DecoderPlugin {
-  id = 'hex';
-  name = '16进制';
-  hide = true;
-
-  checkString(input: string): number {
+@Plugin({ id: 'hex', name: '16进制' })
+export class HexDecoder {
+  checkString(input: string) {
     if (input.length % 2 === 0 && /^[a-fA-F0-9]+$/.test(input)) {
+      return Math.min(98, 10 + input.length * 10);
+    }
+
+    if (/^(?:\\x[a-fA-F0-9]{2})+$/.test(input)) {
       return Math.min(98, 10 + input.length * 10);
     }
 
@@ -14,6 +15,9 @@ export class HexDecoder implements DecoderPlugin {
   }
 
   decode(input: string): string {
+    if (input.startsWith('\\x')) {
+      input = input.replace(/\\x/g, '');
+    }
     const bytes = [];
     for (let i = 0; i < input.length; i += 2) {
       bytes.push(parseInt(input.slice(i, i + 2), 16));

@@ -1,4 +1,3 @@
-import { getPluginList } from '../plugins/enabled';
 import {
   DecodeError,
   DecodeErrorCode,
@@ -8,24 +7,12 @@ import {
 import type {
   DecodeResult,
   DecoderPlugin,
-  DecoderPluginInfo,
   DecodeSuccessResult,
   EncodeResult,
 } from './types';
 
 export class Decoder {
-  private plugins = getPluginList() as (new () => DecoderPlugin)[];
-  private initializedPlugins: DecoderPlugin[] | undefined = undefined;
-
-  initializePlugins(): void {
-    return void this.getPlugins();
-  }
-
-  private getPlugins(): DecoderPlugin[] {
-    if (this.initializedPlugins) return this.initializedPlugins;
-    this.initializedPlugins = this.plugins.map((Plugin) => new Plugin());
-    return this.initializedPlugins;
-  }
+  constructor(private plugins: DecoderPlugin[]) {}
 
   async decode(input: string, key?: string): Promise<DecodeSuccessResult[]> {
     const results = await Promise.all(this.decodeAsync(input, key));
@@ -36,11 +23,11 @@ export class Decoder {
 
   decodeAsync(input: string, key?: string): Promise<DecodeResult>[] {
     const freq = this.getCharFrequency(input);
-    return this.getPlugins().map<Promise<DecodeResult>>(async (plugin) => {
-      const pluginInfos: DecoderPluginInfo = plugin;
+    return this.plugins.map<Promise<DecodeResult>>(async (plugin) => {
+      const pluginInfo = plugin.info();
       if (plugin.needNetwork && !navigator.onLine) {
         return {
-          ...pluginInfos,
+          ...pluginInfo,
           score: 0,
           errorCode: DecodeErrorCode.NetworkRequired,
           errorMessage: 'Network access is required',
@@ -55,7 +42,7 @@ export class Decoder {
           error,
         );
         return {
-          ...pluginInfos,
+          ...pluginInfo,
           score: 0,
           errorCode:
             error instanceof DecodeError ? error.code : DecodeErrorCode.Unknown,
@@ -65,7 +52,7 @@ export class Decoder {
 
       if (score <= 0) {
         return {
-          ...pluginInfos,
+          ...pluginInfo,
           score,
           errorCode: DecodeErrorCode.DecoderSkipped,
           errorMessage: 'scores 0, skipped',
@@ -78,7 +65,7 @@ export class Decoder {
       } catch (error) {
         console.error(`Error decoding with plugin ${plugin.name}:`, error);
         return {
-          ...pluginInfos,
+          ...pluginInfo,
           score,
           errorCode:
             error instanceof DecodeError ? error.code : DecodeErrorCode.Unknown,
@@ -86,7 +73,7 @@ export class Decoder {
         };
       }
       return {
-        ...pluginInfos,
+        ...pluginInfo,
         score,
         decoded,
       };
@@ -102,12 +89,11 @@ export class Decoder {
   }
 
   getPluginsList(): DecoderPlugin[] {
-    return this.getPlugins().filter((plugin) => !plugin.hide);
+    return this.plugins.filter((plugin) => !plugin.hide);
   }
 
   private getPluginById(id: string): DecoderPlugin | undefined {
-    const plugins = this.getPlugins();
-    return plugins.find((p) => p.id === id);
+    return this.plugins.find((p) => p.id === id);
   }
 
   async encode(
@@ -142,9 +128,10 @@ export class Decoder {
         errorMessage: 'Encoder not available',
       };
     }
+    const pluginInfo = plugin.info();
     if (plugin.needNetwork && !navigator.onLine) {
       return {
-        ...plugin,
+        ...pluginInfo,
         errorCode: EncodeErrorCode.NetworkRequired,
         errorMessage: 'Network access is required',
       };
@@ -152,13 +139,13 @@ export class Decoder {
     try {
       const encoded = await plugin.encode(input, key);
       return {
-        ...plugin,
+        ...pluginInfo,
         encoded,
       };
     } catch (error) {
       console.error(`Error encoding with plugin ${plugin.name}:`, error);
       return {
-        ...plugin,
+        ...pluginInfo,
         errorCode:
           error instanceof EncodeError ? error.code : EncodeErrorCode.Unknown,
         errorMessage: error instanceof Error ? error.message : String(error),

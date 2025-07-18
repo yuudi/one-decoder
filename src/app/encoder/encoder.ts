@@ -56,7 +56,7 @@ export class Encoder {
   }
 
   private readonly selectedPluginStorageKey =
-    'one-revealer.encoder.selectedPlugin';
+    'one-decoder.encoder.selectedPlugin';
   private setupSelectedPluginStorage() {
     //save to storage
     effect(() => {

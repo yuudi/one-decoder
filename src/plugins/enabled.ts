@@ -1,9 +1,12 @@
 import type { DecoderPluginImplement } from '../decoders/types';
-import { Base64Decoder } from './basic/base64';
-import { EscapeDecoder } from './basic/escape';
-import { HexDecoder } from './basic/hex';
-import { MorseDecoder } from './basic/morse';
-import { UrlDecoder } from './basic/url';
+import { Base32Decoder } from './basics/base32';
+import { Base58Decoder } from './basics/base58';
+import { Base64Decoder } from './basics/base64';
+import { EscapeDecoder } from './basics/escape';
+import { HexDecoder } from './basics/hex';
+import { MorseDecoder } from './basics/morse';
+import { PunycodeDecoder } from './basics/punycode';
+import { UrlDecoder } from './basics/url';
 import { AbracadabraDecoder } from './memes/abracadabra';
 import { BeastDecoder, BeastNoEmbedDecoder } from './memes/beast';
 import { BuddhaDecoder } from './memes/buddha';
@@ -24,10 +27,13 @@ export function getPluginList(): DecoderPluginConstructor[] {
   return [
     // this order shows in encoder page
     Base64Decoder,
+    Base32Decoder,
+    Base58Decoder,
     HexDecoder,
     UrlDecoder,
     EscapeDecoder,
     MorseDecoder,
+    PunycodeDecoder,
     BVDecoder,
     YoutubeDecoder,
     BuddhaDecoder,

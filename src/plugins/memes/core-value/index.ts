@@ -1,11 +1,12 @@
-import { type DecoderPlugin } from '../../../decoders/types';
+import { Plugin } from '../../../decoders/decorators';
 import CoreValue from './lib-core-value';
 
-export class CoreValueDecoder implements DecoderPlugin {
-  id = 'core-value';
-  name = '核心价值观';
-  link = 'https://sym233.github.io/core-values-encoder/';
-
+@Plugin({
+  id: 'core-value',
+  name: '核心价值观',
+  link: 'https://sym233.github.io/core-values-encoder/',
+})
+export class CoreValueDecoder {
   checkString(input: string): number {
     if (/^[富强民主文明和谐自由平等公正法治爱国敬业诚信友善]+$/.test(input)) {
       return 100;

@@ -1,12 +1,13 @@
+import { Plugin } from '../../decoders/decorators';
 import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
-import { type DecoderPlugin } from '../../decoders/types';
 
-export class BVDecoder implements DecoderPlugin {
-  id = 'bilibili.bv';
-  name = 'BV号';
-  link = 'https://www.zhihu.com/question/381784377/answer/1099438784';
-  hide = true;
-
+@Plugin({
+  id: 'bilibili.bv',
+  name: 'BV号',
+  link: 'https://www.zhihu.com/question/381784377/answer/1099438784',
+  hide: true,
+})
+export class BVDecoder {
   private av2bv: (src: bigint | number | string) => string;
   private bv2av: (src: string) => bigint;
 

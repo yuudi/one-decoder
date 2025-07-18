@@ -1,13 +1,14 @@
+import { Plugin } from '../../decoders/decorators';
 import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
-import { type DecoderPlugin } from '../../decoders/types';
 
-export class NBNHHSHDecoder implements DecoderPlugin {
-  id = 'nbnhhsh';
-  name = '能不能好好说话';
-  link = 'https://lab.magiconch.com/nbnhhsh/';
-  hide = true;
-  needNetwork = true;
-
+@Plugin({
+  id: 'nbnhhsh',
+  name: '能不能好好说话',
+  link: 'https://lab.magiconch.com/nbnhhsh/',
+  hide: true,
+  needNetwork: true,
+})
+export class NBNHHSHDecoder {
   checkString(input: string): number {
     if (/^[a-z0-9]{2,}$/.test(input)) {
       return Math.min(60, Math.floor(240 / input.length));

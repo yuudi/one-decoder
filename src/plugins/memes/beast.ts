@@ -1,13 +1,14 @@
+import { Plugin } from '../../decoders/decorators';
 import { EncodeError, EncodeErrorCode } from '../../decoders/errors';
-import { type DecoderPlugin } from '../../decoders/types';
 
-export class BeastDecoder implements DecoderPlugin {
-  id = 'beast';
-  name = '兽音';
-  link = 'https://github.com/SycAlright/beast_sdk';
-  needKey = true;
-  encoderHelpMessage = '“密钥”部分为字符集，必须为4个字符';
-
+@Plugin({
+  id: 'beast',
+  name: '兽音',
+  link: 'https://github.com/SycAlright/beast_sdk',
+  needKey: true,
+  encoderHelpMessage: '"密钥"部分为字符集，必须为4个字符',
+})
+export class BeastDecoder {
   checkString(input: string, data: { freq: Record<string, number> }): number {
     if (/^[喵嗷呜啊~]+$/.test(input)) {
       return 100;
@@ -72,9 +73,15 @@ export class BeastDecoder implements DecoderPlugin {
   }
 }
 
+@Plugin({
+  id: 'beast-no-embed',
+  name: '兽音（旧版）',
+  link: 'https://github.com/SycAlright/beast_sdk',
+  needKey: true,
+  encoderHelpMessage: '"密钥"部分为字符集，必须为4个字符',
+  hide: true,
+})
 export class BeastNoEmbedDecoder extends BeastDecoder {
-  override name = '兽音（旧版）';
-  hide = true;
   override checkString(input: string): number {
     if (/^[嗷呜啊~]+$/.test(input)) {
       return 99;

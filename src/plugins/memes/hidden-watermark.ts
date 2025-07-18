@@ -1,17 +1,18 @@
+import { Plugin } from '../../decoders/decorators';
 import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
-import { type DecoderPlugin } from '../../decoders/types';
 
 const wj = '\u2060'; // WORD JOINER
 const zwnbsp = '\uFEFF'; // ZERO WIDTH NO-BREAK SPACE
 
-export class HiddenWatermarkDecoder implements DecoderPlugin {
-  id = 'hidden-watermark';
-  name = '隐水印';
-  description = '郭飞版零宽字符';
-  link = 'https://www.guofei.site/os/text_wm.html';
-  needKey = true;
-  hide = true;
-
+@Plugin({
+  id: 'hidden-watermark',
+  name: '隐水印',
+  description: '郭飞版零宽字符',
+  link: 'https://www.guofei.site/os/text_wm.html',
+  needKey: true,
+  hide: true,
+})
+export class HiddenWatermarkDecoder {
   checkString(input: string): number {
     if (input.includes(wj) || input.includes(zwnbsp)) {
       return 100;

@@ -29,7 +29,9 @@ export interface DecoderPluginImplement {
 
 export interface DecoderPlugin
   extends DecoderPluginInfo,
-    DecoderPluginImplement {}
+    DecoderPluginImplement {
+  info(): DecoderPluginInfo;
+}
 
 export interface DecodeSuccessResult extends DecoderPluginInfo {
   score: number;

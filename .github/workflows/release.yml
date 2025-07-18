@@ -25,9 +25,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.npm
-          key: OneRevealer-${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: OneDecoder-${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            OneRevealer-${{ runner.os }}-node-
+            OneDecoder-${{ runner.os }}-node-
 
       - name: Build
         run: |
@@ -37,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/one-revealer/browser
+          path: ./dist/one-decoder/browser
 
       - name: Deploy to Github-Pages
         uses: actions/deploy-pages@v4

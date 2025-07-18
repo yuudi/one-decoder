@@ -1,14 +1,15 @@
+import { Plugin } from '../../decoders/decorators';
 import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
-import { type DecoderPlugin } from '../../decoders/types';
 
-export class BuddhaDecoder implements DecoderPlugin {
-  id = 'buddha';
-  name = '与佛论禅';
-  description = 'takuron版与佛论禅（与佛论禅流传的版本较多，本站无法全部收集）';
-  link = 'https://tools.takuron.com/talk-with-buddha/';
-  encoderHelpMessage = '本站使用原作者第二版默认密码："takuron.top"';
-  needKey = true;
-
+@Plugin({
+  id: 'buddha',
+  name: '与佛论禅',
+  description: 'takuron版与佛论禅（与佛论禅流传的版本较多，本站无法全部收集）',
+  link: 'https://tools.takuron.com/talk-with-buddha/',
+  encoderHelpMessage: '本站使用原作者第二版默认密码："takuron.top"',
+  needKey: true,
+})
+export class BuddhaDecoder {
   // different default passwords from different deployments
   private static readonly defaultPasswords = [
     'takuron.top',

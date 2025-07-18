@@ -1,12 +1,13 @@
+import { Plugin } from '../../decoders/decorators';
 import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
-import { type DecoderPlugin } from '../../decoders/types';
 
-export class HouDecoder implements DecoderPlugin {
-  id = 'hou';
-  name = '齁语'; // 原名 "母猪文" 不好听
-  link = 'https://msbt.seku.su/';
-  hide = false;
-
+@Plugin({
+  id: 'hou',
+  name: '齁语', // 原名 "母猪文" 不好听
+  link: 'https://msbt.seku.su/',
+  hide: false,
+})
+export class HouDecoder {
   code: string[];
   codeMap: Record<string, number>;
   constructor() {

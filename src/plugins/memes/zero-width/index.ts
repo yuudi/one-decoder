@@ -1,15 +1,16 @@
 import { decode, encode, zeroWidthDict } from 'zero-width-lib';
+import { Plugin } from '../../../decoders/decorators';
 import { EncodeError, EncodeErrorCode } from '../../../decoders/errors';
-import { type DecoderPlugin } from '../../../decoders/types';
 
-export class ZeroWidthDecoder implements DecoderPlugin {
-  id = 'zero-width';
-  name = '零宽';
-  link = 'https://yuanfux.github.io/zero-width-web/';
-  needKey = true;
-  encoderHelpMessage =
-    '“密钥”处填明文。某些软件可能显示或删除零宽字符，请自行测试。';
-
+@Plugin({
+  id: 'zero-width',
+  name: '零宽',
+  link: 'https://yuanfux.github.io/zero-width-web/',
+  needKey: true,
+  encoderHelpMessage:
+    '"密钥"处填明文。某些软件可能显示或删除零宽字符，请自行测试。',
+})
+export class ZeroWidthDecoder {
   checkString(input: string): number {
     const charset = Object.values(zeroWidthDict);
     if (input.length >= 3 && charset.includes(input[1])) {
