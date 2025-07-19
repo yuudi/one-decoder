@@ -8,7 +8,7 @@ import { EncodeError, EncodeErrorCode } from '../../decoders/errors';
 })
 export class MorseDecoder {
   checkString(input: string): number {
-    if (/^[.-/| ]+$/.test(input)) {
+    if (/^[-./| ]+$/.test(input)) {
       // possible dividers: "|" "/" ""
       return 95;
     }
