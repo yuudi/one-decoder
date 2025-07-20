@@ -7,7 +7,7 @@ import { Plugin } from '../../decoders/decorators';
 })
 export class YoutubeDecoder {
   checkString(input: string): number {
-    const match = input.match(/(v=)?[\w-]{11}(&.+)?$/);
+    const match = input.match(/^(?:(?:.*\?)?v=)?[\w-]{11}(&.+)?$/);
     if (match) {
       if (match[1]) {
         return 99;

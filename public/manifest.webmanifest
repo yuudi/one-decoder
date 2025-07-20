@@ -23,5 +23,24 @@
       "type": "image/png",
       "purpose": "maskable any"
     }
+  ],
+  "share_target": {
+    "action": "./#/decoder",
+    "method": "GET",
+    "params": {
+      "text": "input"
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "解码",
+      "url": "./#/decoder",
+      "icons": [{ "src": "icons/gold-key-128.png", "sizes": "128x128" }]
+    },
+    {
+      "name": "编码",
+      "url": "./#/encoder",
+      "icons": [{ "src": "icons/gold-key-128.png", "sizes": "128x128" }]
+    }
   ]
 }
