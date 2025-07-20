@@ -21,26 +21,28 @@
       全选
     </mat-checkbox>
   </div>
-  <mat-selection-list
-    [(ngModel)]="selectedPlugin"
-    name="selectedPlugin"
-    class="plugin-selection-list"
-    [class.plugin-selection-list__results-shown]="output !== null"
-  >
-    @for (plugin of plugins; track plugin.id) {
-      @if (plugin.encode) {
-        <mat-list-option
-          [value]="plugin.id"
-          [disabled]="useKey() && !plugin.needKey"
-        >
-          <div matListItemTitle>{{ plugin.name }}</div>
-          @if (plugin.encoderHelpMessage) {
-            <div matListItemLine>{{ plugin.encoderHelpMessage }}</div>
-          }
-        </mat-list-option>
+  <div class="plugin-selection-list-wrapper">
+    <mat-selection-list
+      [(ngModel)]="selectedPlugin"
+      name="selectedPlugin"
+      class="plugin-selection-list"
+      [class.plugin-selection-list__results-shown]="output !== null"
+    >
+      @for (plugin of plugins; track plugin.id) {
+        @if (plugin.encode) {
+          <mat-list-option
+            [value]="plugin.id"
+            [disabled]="useKey() && !plugin.needKey"
+          >
+            <div matListItemTitle>{{ plugin.name }}</div>
+            @if (plugin.encoderHelpMessage) {
+              <div matListItemLine>{{ plugin.encoderHelpMessage }}</div>
+            }
+          </mat-list-option>
+        }
       }
-    }
-  </mat-selection-list>
+    </mat-selection-list>
+  </div>
 
   <div class="key-settings-block">
     <mat-slide-toggle

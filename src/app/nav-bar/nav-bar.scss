@@ -1,0 +1,38 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.title-row {
+  display: none;
+  @media (max-width: 499px) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.title-inline {
+  @media (max-width: 499px) {
+    display: none;
+  }
+}
+
+// use id to override material default style
+#app-toolbar-top .button-with-icon-text {
+  > .button-icon {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    @media (max-width: 699px) {
+      display: none;
+    }
+  }
+}
+
+.button__compact {
+  @media (max-width: 449px) {
+    margin: auto -0.25em;
+  }
+  @media (max-width: 399px) {
+    margin: auto -0.5em;
+  }
+}

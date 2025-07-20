@@ -18,13 +18,80 @@
   display: flex;
 }
 
-.plugin-selection-list {
+// Wrapper container for scroll indicators
+.plugin-selection-list-wrapper {
   width: 80%;
   margin: 0 auto;
-  max-height: 50vh;
-  overflow-y: scroll;
-  &__results-shown {
-    max-height: 30vh;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 6px; // Leave space for scrollbar
+    height: 0.5em;
+    pointer-events: none;
+    z-index: 10;
+    border-radius: var(--mat-sys-corner-extra-small);
+  }
+
+  // Top gradient mask
+  &::before {
+    top: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--mat-sys-background),
+      transparent
+    );
+  }
+
+  // Bottom gradient mask
+  &::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--mat-sys-background), transparent);
+  }
+
+  .plugin-selection-list {
+    width: 100%;
+    margin: 0;
+
+    max-height: 50vh;
+    overflow-y: scroll;
+    border-radius: var(--mat-sys-corner-extra-small);
+    background: var(--mat-sys-background);
+
+    // Material Design elevation shadow
+    box-shadow:
+      0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+    // Material Design scrollbar styling
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.26);
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.38);
+      }
+
+      &:active {
+        background: rgba(0, 0, 0, 0.54);
+      }
+    }
+
+    &__results-shown {
+      max-height: 30vh;
+    }
   }
 }
 
