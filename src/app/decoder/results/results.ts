@@ -2,7 +2,7 @@ import { Component, computed, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { forkJoin, from, startWith, switchMap } from 'rxjs';
+import { combineLatest, from, startWith, switchMap } from 'rxjs';
 import { DecodeErrorCode } from '../../../decoders/errors';
 import {
   isDecodeSuccessResult,
@@ -30,7 +30,7 @@ export class Results {
   resultsList = toSignal(
     toObservable(this.results).pipe(
       switchMap((resultPromises) =>
-        forkJoin(
+        combineLatest(
           resultPromises.map((resultPromise) =>
             from(resultPromise).pipe(startWith(null)),
           ),
