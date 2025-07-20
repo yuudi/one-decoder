@@ -21,6 +21,11 @@
 .plugin-selection-list {
   width: 80%;
   margin: 0 auto;
+  max-height: 50vh;
+  overflow-y: scroll;
+  &__results-shown {
+    max-height: 30vh;
+  }
 }
 
 .key-settings-block {

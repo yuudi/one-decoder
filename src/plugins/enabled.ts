@@ -19,7 +19,6 @@ import { WhispererDecoder } from './memes/whisperer';
 import { ZeroWidthDecoder } from './memes/zero-width';
 import { BVDecoder } from './others/bilibili';
 import { MysteryCodeDecoders } from './others/mystery-codes';
-import { NBNHHSHDecoder } from './others/nbnhhsh';
 import { YoutubeDecoder } from './others/youtube';
 
 type DecoderPluginConstructor = new () => DecoderPluginImplement;
@@ -48,7 +47,6 @@ export function getPluginList(): DecoderPluginConstructor[] {
     AbracadabraDecoder,
     WhispererDecoder,
     HouDecoder,
-    NBNHHSHDecoder,
     ...MysteryCodeDecoders,
   ];
 }

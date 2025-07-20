@@ -25,6 +25,7 @@
     [(ngModel)]="selectedPlugin"
     name="selectedPlugin"
     class="plugin-selection-list"
+    [class.plugin-selection-list__results-shown]="output !== null"
   >
     @for (plugin of plugins; track plugin.id) {
       @if (plugin.encode) {

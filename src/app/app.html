@@ -1,6 +1,6 @@
 <mat-toolbar id="app-toolbar-top">
   <mat-toolbar-row class="title-row">
-    <span>统一解码</span>
+    <h1>统一解码</h1>
   </mat-toolbar-row>
   <mat-toolbar-row>
     <button mat-button routerLink="/decoder" class="button-with-icon-text">
@@ -13,7 +13,7 @@
       <mat-icon fontIcon="info" class="button-icon" /> 关于
     </button>
     <span class="spacer"></span>
-    <span class="title-inline">统一解码</span>
+    <h1 class="title-inline">统一解码</h1>
     <span class="spacer"></span>
     @if (installable()) {
       <button mat-button (click)="installPWA()" class="button-with-icon-text">
