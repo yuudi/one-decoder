@@ -36,3 +36,9 @@
     margin: auto -0.5em;
   }
 }
+
+.github-svg-icon {
+  @media (prefers-color-scheme: dark) {
+    filter: invert(1);
+  }
+}
