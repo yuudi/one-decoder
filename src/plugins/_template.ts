@@ -5,9 +5,9 @@ import { Plugin } from '../decoders/decorators';
   name: 'New Decoder Plugin', // Display name
 
   // // Optional properties
-  // description: 'Template for new plugins', // Description
-  // author: 'name', // Author name
-  // link: 'https://example.com', // Link to documentation or homepage
+  // description: 'Template for new plugins', // Description, shown in decoding result
+  // author: 'name', // Author name, shown in about page
+  // link: 'https://example.com', // Link to documentation or homepage, shown in decoding result and encoding result
   // needKey: false, // Whether the plugin requires a key
   // encoderHelpMessage: '', // Shown in encoding page
   // needNetwork: false, // Whether the plugin need external API calls

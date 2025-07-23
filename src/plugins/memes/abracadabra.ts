@@ -4,8 +4,9 @@ import { Plugin } from '../../decoders/decorators';
 @Plugin({
   id: 'abracadabra',
   name: '魔曰',
-  link: 'https://abra.halu.ca/',
-  description: `常有不兼容更新，如解码失败请前往官网(当前版本：${version})`,
+  link: 'https://abra.js.org/',
+  description: `常有不兼容更新，如解码失败请前往官网(本站使用版本：${version})`,
+  author: '@SheepChef',
   needKey: true,
   encoderHelpMessage: '完整选项请前往官网',
 })

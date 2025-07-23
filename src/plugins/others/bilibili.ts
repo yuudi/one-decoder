@@ -5,6 +5,7 @@ import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
   id: 'bilibili.bv',
   name: 'BV号',
   link: 'https://www.zhihu.com/question/381784377/answer/1099438784',
+  author: 'mcfx',
   hide: true,
 })
 export class BVDecoder {

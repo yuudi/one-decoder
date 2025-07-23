@@ -15,6 +15,9 @@
               } @else {
                 {{ plugin.name }}
               }
+              @if (plugin.author) {
+                <span class="author">by {{ plugin.author }}</span>
+              }
             </li>
           }
         </ul>

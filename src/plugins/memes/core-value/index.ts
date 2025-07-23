@@ -5,6 +5,7 @@ import CoreValue from './lib-core-value';
   id: 'core-value',
   name: '核心价值观',
   link: 'https://sym233.github.io/core-values-encoder/',
+  author: '@sym233',
 })
 export class CoreValueDecoder {
   checkString(input: string): number {

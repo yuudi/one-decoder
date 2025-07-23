@@ -9,6 +9,7 @@ const zwnbsp = '\uFEFF'; // ZERO WIDTH NO-BREAK SPACE
   name: '隐水印',
   description: '郭飞版零宽字符',
   link: 'https://www.guofei.site/os/text_wm.html',
+  author: '郭飞',
   needKey: true,
   hide: true,
 })

@@ -4,6 +4,7 @@ import { Plugin } from '../../decoders/decorators';
   id: 'whisperer',
   name: '低语者',
   link: 'https://github.com/Borber/Whisperer',
+  author: '@Borber',
   needKey: false,
   encoderHelpMessage: '完整选项请前往官网',
 })

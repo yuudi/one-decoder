@@ -22,6 +22,10 @@ This app built with [Angular 20](https://v20.angular.dev/overview) with [zone-le
 
 Run `npm start` and open <localhost:4200> to debug
 
+> Known issue:
+> wasm modules can't load in debug environment. And the solution `vite-plugin-wasm` can't be configured with Angular.
+> This error won't affect production environment
+
 ### Plugins
 
 Use [template file](./src/plugins/_template.ts), create a new class and put it in [enabled list](./src/plugins/enabled.ts)
