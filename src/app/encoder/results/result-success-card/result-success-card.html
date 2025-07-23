@@ -4,8 +4,8 @@
       <mat-card-title class="result-name"> {{ result().name }} </mat-card-title>
       @if (result().link) {
         <mat-card-subtitle>
-          <app-external-link href="{{ result().link }}" class="result-link"
-            >源网站</app-external-link
+          <a app-external-link="{{ result().link }}" class="result-link"
+            >源网站</a
           >
         </mat-card-subtitle>
       }

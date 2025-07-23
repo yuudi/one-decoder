@@ -8,8 +8,8 @@
             <span class="result-description"> {{ result().description }} </span>
           }
           @if (result().link) {
-            <app-external-link href="{{ result().link }}" class="result-link"
-              >源网站</app-external-link
+            <a app-external-link="{{ result().link }}" class="result-link"
+              >源网站</a
             >
           }
         </mat-card-subtitle>

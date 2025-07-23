@@ -1,8 +1,4 @@
 <mat-card class="about-card">
-  <!-- <mat-card-header>
-    <mat-card-title> 关于 </mat-card-title>
-  </mat-card-header> -->
-
   <mat-card-content>
     <mat-tab-group>
       <mat-tab label="关于">
@@ -15,9 +11,7 @@
           @for (plugin of pluginList; track plugin.id) {
             <li>
               @if (plugin.link) {
-                <app-external-link href="{{ plugin.link }}">{{
-                  plugin.name
-                }}</app-external-link>
+                <a app-external-link="{{ plugin.link }}">{{ plugin.name }}</a>
               } @else {
                 {{ plugin.name }}
               }
@@ -26,13 +20,13 @@
         </ul>
 
         若有代码问题请提交
-        <app-external-link
-          href="https://github.com/yuudi/one-decoder/issues"
+        <a
+          app-external-link="https://github.com/yuudi/one-decoder/issues"
           rel="noopener noreferrer"
-          >Issue</app-external-link
-        >，非代码问题也欢迎参与<app-external-link
-          href="https://github.com/yuudi/one-decoder/discussions"
-          >自由讨论</app-external-link
+          >Issue</a
+        >，非代码问题也欢迎参与<a
+          app-external-link="https://github.com/yuudi/one-decoder/discussions"
+          >自由讨论</a
         >
       </mat-tab>
       <mat-tab label="进阶">
@@ -48,17 +42,17 @@
         </p>
         <p>
           PWA 安装方法可参考
-          <app-external-link
-            href="https://web.dev/learn/pwa/installation#installation_criteria"
-            >Google Web Dev</app-external-link
+          <a
+            app-external-link="https://web.dev/learn/pwa/installation#installation_criteria"
+            >Google Web Dev</a
           >
         </p>
         <p>
           安装为 PWA
           后，可以直接将文本分享给本应用，获取解码结果。（需要系统支持，目前支持情况请参考
-          <app-external-link
-            href="https://developer.mozilla.org/docs/Web/Progressive_web_apps/Manifest/Reference/share_target#browser_compatibility"
-            >MDN</app-external-link
+          <a
+            app-external-link="https://developer.mozilla.org/docs/Web/Progressive_web_apps/Manifest/Reference/share_target#browser_compatibility"
+            >MDN</a
           >
           ）
         </p>
@@ -72,9 +66,7 @@
         </p>
         <p>
           本站托管于
-          <app-external-link href="https://pages.github.com/"
-            >GitHub Pages</app-external-link
-          >
+          <a app-external-link="https://pages.github.com/">GitHub Pages</a>
           ，基础资源由 GitHub 的服务器处理。
         </p>
       </mat-tab>
