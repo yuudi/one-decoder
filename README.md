@@ -20,10 +20,12 @@ npm run build
 
 This app built with [Angular 20](https://v20.angular.dev/overview) with [zone-less](https://angular.dev/guide/zoneless) and [signals](https://angular.dev/guide/signals), please read them before start.
 
+[AI-instruction file](.github/copilot-instructions.md) is helpful for human as well!
+
 Run `npm start` and open <localhost:4200> to debug
 
 > Known issue:
-> wasm modules can't load in debug environment. And the solution `vite-plugin-wasm` can't be configured with Angular.
+> wasm modules can't load correctly in debug environment because it use dynamic import. And the solution `vite-plugin-wasm` can't be configured with Angular.
 > This error won't affect production environment
 
 ### Plugins
