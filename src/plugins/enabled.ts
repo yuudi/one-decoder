@@ -1,4 +1,5 @@
 import type { DecoderPluginImplement } from '../decoders/types';
+import { AES256Decoders } from './basics/aes256';
 import { Base32Decoder } from './basics/base32';
 import { Base58Decoder } from './basics/base58';
 import { Base64Decoder } from './basics/base64';
@@ -35,6 +36,7 @@ export function getPluginList(): DecoderPluginConstructor[] {
     HtmlDecoder,
     MorseDecoder,
     PunycodeDecoder,
+    ...AES256Decoders,
     BVDecoder,
     YoutubeDecoder,
     BuddhaDecoder,
