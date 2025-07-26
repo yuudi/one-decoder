@@ -8,7 +8,7 @@ import { Plugin } from '../decoders/decorators';
   // description: 'Template for new plugins', // Description, shown in decoding result
   // author: 'name', // Author name, shown in about page
   // link: 'https://example.com', // Link to documentation or homepage, shown in decoding result and encoding result
-  // needKey: false, // Whether the plugin requires a key
+  // encodeKey: 'not-allowed', // Whether the plugin needs a key, can be 'optional', 'required', or 'not-allowed', default is 'not-allowed'
   // encoderHelpMessage: '', // Shown in encoding page
   // needNetwork: false, // Whether the plugin need external API calls
   // hide: false, // Whether to hide this plugin in about page and encoding page

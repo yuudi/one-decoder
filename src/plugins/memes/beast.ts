@@ -5,7 +5,7 @@ import { EncodeError, EncodeErrorCode } from '../../decoders/errors';
   id: 'beast',
   name: '兽音',
   link: 'https://github.com/SycAlright/beast_sdk',
-  needKey: true,
+  encodeKey: 'optional',
   encoderHelpMessage: '"密钥"部分为字符集，必须为4个字符',
 })
 export class BeastDecoder {
@@ -77,7 +77,7 @@ export class BeastDecoder {
   id: 'beast-no-embed',
   name: '兽音（旧版）',
   link: 'https://github.com/SycAlright/beast_sdk',
-  needKey: true,
+  encodeKey: 'optional',
   encoderHelpMessage: '"密钥"部分为字符集，必须为4个字符',
   hide: true,
 })

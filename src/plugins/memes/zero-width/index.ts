@@ -7,7 +7,7 @@ import { EncodeError, EncodeErrorCode } from '../../../decoders/errors';
   name: '零宽',
   link: 'https://yuanfux.github.io/zero-width-web/',
   author: 'Yuan Fu',
-  needKey: true,
+  encodeKey: 'required',
   encoderHelpMessage:
     '"密钥"处填明文。某些软件可能显示或删除零宽字符，请自行测试。',
 })

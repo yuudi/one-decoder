@@ -7,7 +7,7 @@ import { Plugin } from '../../decoders/decorators';
   link: 'https://abra.js.org/',
   description: `常有不兼容更新，如解码失败请前往官网(本站使用版本：${version})`,
   author: '@SheepChef',
-  needKey: true,
+  encodeKey: 'optional',
   encoderHelpMessage: '完整选项请前往官网',
 })
 export class AbracadabraDecoder {

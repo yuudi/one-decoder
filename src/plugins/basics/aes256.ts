@@ -318,7 +318,7 @@ abstract class AES256Base implements DecoderPluginImplement {
 @Plugin({
   id: 'aes256-cbc-hex',
   name: 'AES256-CBC (Hex)',
-  needKey: true,
+  encodeKey: 'required',
   encoderHelpMessage: '默认IV前置，PKCS#7填充',
   hide: true,
 })
@@ -330,7 +330,7 @@ class AES256CBCHexDecoder extends AES256Base {
 @Plugin({
   id: 'aes256-cbc-base64',
   name: 'AES256-CBC (Base64)',
-  needKey: true,
+  encodeKey: 'required',
   encoderHelpMessage: '默认IV前置，PKCS#7填充',
   hide: false, // This is the only visible AES256 decoder
 })
@@ -342,7 +342,7 @@ class AES256CBCBase64Decoder extends AES256Base {
 @Plugin({
   id: 'aes256-ctr-hex',
   name: 'AES256-CTR (Hex)',
-  needKey: true,
+  encodeKey: 'required',
   encoderHelpMessage: '默认IV前置，无填充',
   hide: true,
 })
@@ -354,7 +354,7 @@ class AES256CTRHexDecoder extends AES256Base {
 @Plugin({
   id: 'aes256-ctr-base64',
   name: 'AES256-CTR (Base64)',
-  needKey: true,
+  encodeKey: 'required',
   encoderHelpMessage: '默认IV前置，无填充',
   hide: true,
 })

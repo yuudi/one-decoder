@@ -32,7 +32,10 @@
         @if (plugin.encode) {
           <mat-list-option
             [value]="plugin.id"
-            [disabled]="useKey() && !plugin.needKey"
+            [disabled]="
+              useKey() &&
+              !(plugin.encodeKey === 'optional' || plugin.encodeKey === 'required')
+            "
           >
             <div matListItemTitle>{{ plugin.name }}</div>
             @if (plugin.encoderHelpMessage) {

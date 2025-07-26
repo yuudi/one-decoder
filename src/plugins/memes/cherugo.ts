@@ -5,7 +5,7 @@ import { Plugin } from '../../decoders/decorators';
   name: '切噜语',
   author: '@Ice9Coffee',
   link: 'https://pcrbot.github.io/cherugo.js/',
-  needKey: false,
+  encodeKey: 'not-allowed',
 })
 export class CherugoDecoder {
   checkString(input: string): number {

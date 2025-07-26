@@ -59,7 +59,6 @@ src/plugins/
 - Use `DecodeError` from `src/decoders/errors.ts` for decode failures
 - Provide specific error codes via `DecodeErrorCode` enum
 - Key-required plugins should throw `InvalidKey` error when key missing
-- If Key is optional, the property `needKey` should still be set to `true`
 
 ### Styling Conventions
 

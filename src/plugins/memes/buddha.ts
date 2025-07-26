@@ -8,7 +8,7 @@ import { DecodeError, DecodeErrorCode } from '../../decoders/errors';
   author: '@Takuron',
   link: 'https://tools.takuron.com/talk-with-buddha/',
   encoderHelpMessage: '本站使用原作者第二版默认密码："takuron.top"',
-  needKey: true,
+  encodeKey: 'optional',
 })
 export class BuddhaDecoder {
   // different default passwords from different deployments

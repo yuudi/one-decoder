@@ -7,7 +7,7 @@ export type DecoderPluginInfo = Readonly<{
   description?: string;
   author?: string;
   link?: string;
-  needKey?: boolean;
+  encodeKey?: 'optional' | 'required' | 'not-allowed';
   encoderHelpMessage?: string;
   needNetwork?: boolean;
   hide?: boolean;

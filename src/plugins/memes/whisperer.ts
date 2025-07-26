@@ -5,7 +5,7 @@ import { Plugin } from '../../decoders/decorators';
   name: '低语者',
   link: 'https://github.com/Borber/Whisperer',
   author: '@Borber',
-  needKey: false,
+  encodeKey: 'not-allowed',
   encoderHelpMessage: '完整选项请前往官网',
 })
 export class WhispererDecoder {

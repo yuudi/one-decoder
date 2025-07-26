@@ -84,9 +84,12 @@ export class Encoder {
     const key = this.useKey() ? this.key() : undefined;
 
     if (key) {
-      ids = ids.filter(
-        (id) => this.plugins.find((plugin) => plugin.id === id)?.needKey,
-      );
+      ids = ids.filter((id) => {
+        const encodeKey = this.plugins.find(
+          (plugin) => plugin.id === id,
+        )?.encodeKey;
+        return encodeKey === 'required' || encodeKey === 'optional';
+      });
     }
 
     this.output = this.decodeService.encodeAsync(ids, input, key);

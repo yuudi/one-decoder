@@ -10,7 +10,7 @@ const zwnbsp = '\uFEFF'; // ZERO WIDTH NO-BREAK SPACE
   description: '郭飞版零宽字符',
   link: 'https://www.guofei.site/os/text_wm.html',
   author: '郭飞',
-  needKey: true,
+  encodeKey: 'required',
   hide: true,
 })
 export class HiddenWatermarkDecoder {
