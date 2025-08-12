@@ -5,7 +5,7 @@ import { Plugin } from '../../decoders/decorators';
   id: 'abracadabra',
   name: '魔曰',
   link: 'https://abra.js.org/',
-  description: `常有不兼容更新，如解码失败请前往官网(本站使用版本：${version})`,
+  description: `时有不向前兼容的更新，如解码失败请前往官网(本站使用版本：${version})`,
   author: '@SheepChef',
   encodeKey: 'optional',
   encoderHelpMessage: '完整选项请前往官网',

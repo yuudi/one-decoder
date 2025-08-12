@@ -33,7 +33,7 @@
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
     "@angular/service-worker": "^20.1.0",
-    "abracadabra-cn": "^3.1.11",
+    "abracadabra-cn": "^3.2.0",
     "bs58": "^6.0.0",
     "cherugo": "git+https://github.com/yuudi/cherugo.js",
     "crypto-js": "^4.2.0",
