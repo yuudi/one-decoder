@@ -151,7 +151,7 @@ abstract class AES256Base implements DecoderPluginImplement {
     const keyBytes = this.stringToBytes(keyString);
 
     // Use SHA256 to generate a consistent 32-byte key from any input
-    const hashBuffer = await crypto.subtle.digest('SHA-256', keyBytes);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', keyBytes.slice());
     const finalKeyBytes = new Uint8Array(hashBuffer);
 
     return await crypto.subtle.importKey(
@@ -198,7 +198,7 @@ abstract class AES256Base implements DecoderPluginImplement {
           iv: iv,
         },
         cryptoKey,
-        plainToEncrypt,
+        plainToEncrypt.slice(),
       );
 
       // Combine IV + ciphertext and convert to output format
